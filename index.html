@@ -89,27 +89,10 @@
         }
 
         @keyframes float {
-
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1) rotate(0deg);
-                opacity: 0.5;
-            }
-
-            25% {
-                transform: translate(50px, -80px) scale(1.2) rotate(90deg);
-                opacity: 0.7;
-            }
-
-            50% {
-                transform: translate(-30px, 60px) scale(0.9) rotate(180deg);
-                opacity: 0.4;
-            }
-
-            75% {
-                transform: translate(70px, 30px) scale(1.1) rotate(270deg);
-                opacity: 0.6;
-            }
+            0%, 100% { transform: translate(0, 0) scale(1) rotate(0deg); opacity: 0.5; }
+            25% { transform: translate(50px, -80px) scale(1.2) rotate(90deg); opacity: 0.7; }
+            50% { transform: translate(-30px, 60px) scale(0.9) rotate(180deg); opacity: 0.4; }
+            75% { transform: translate(70px, 30px) scale(1.1) rotate(270deg); opacity: 0.6; }
         }
 
         .particles {
@@ -133,23 +116,10 @@
         }
 
         @keyframes particleFloat {
-            0% {
-                transform: translateY(100vh) translateX(0);
-                opacity: 0;
-            }
-
-            10% {
-                opacity: 1;
-            }
-
-            90% {
-                opacity: 1;
-            }
-
-            100% {
-                transform: translateY(-100vh) translateX(100px);
-                opacity: 0;
-            }
+            0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
         }
 
         nav {
@@ -190,9 +160,7 @@
             transition: transform 0.3s;
         }
 
-        .logo:hover {
-            transform: scale(1.05);
-        }
+        .logo:hover { transform: scale(1.05); }
 
         .mobile-menu-btn {
             display: none;
@@ -213,17 +181,9 @@
             transition: all 0.3s;
         }
 
-        .mobile-menu-btn.active span:nth-child(1) {
-            transform: rotate(45deg) translate(8px, 8px);
-        }
-
-        .mobile-menu-btn.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .mobile-menu-btn.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(7px, -7px);
-        }
+        .mobile-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(8px, 8px); }
+        .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
+        .mobile-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -7px); }
 
         .nav-links {
             display: flex;
@@ -232,10 +192,7 @@
         }
 
         @media (max-width: 768px) {
-            .mobile-menu-btn {
-                display: flex;
-            }
-
+            .mobile-menu-btn { display: flex; }
             .nav-links {
                 position: fixed;
                 top: 0;
@@ -252,10 +209,7 @@
                 border-left: 1px solid var(--border-color);
                 box-shadow: -10px 0 40px rgba(0, 0, 0, 0.5);
             }
-
-            .nav-links.active {
-                right: 0;
-            }
+            .nav-links.active { right: 0; }
         }
 
         .nav-links a {
@@ -280,13 +234,8 @@
             transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .nav-links a:hover {
-            color: var(--text-primary);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
+        .nav-links a:hover { color: var(--text-primary); }
+        .nav-links a:hover::after { width: 100%; }
 
         .container {
             max-width: 1400px;
@@ -309,15 +258,8 @@
         }
 
         @keyframes fadeInUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
+            to { opacity: 1; transform: translateY(0); }
+            from { opacity: 0; transform: translateY(30px); }
         }
 
         .hero-badge {
@@ -335,15 +277,8 @@
         }
 
         @keyframes pulse {
-
-            0%,
-            100% {
-                box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.4);
-            }
-
-            50% {
-                box-shadow: 0 0 0 20px rgba(0, 255, 136, 0);
-            }
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.4); }
+            50% { box-shadow: 0 0 0 20px rgba(0, 255, 136, 0); }
         }
 
         .hero h1 {
@@ -363,15 +298,8 @@
         }
 
         @keyframes gradientShift {
-
-            0%,
-            100% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
         }
 
         .hero-subtitle {
@@ -454,15 +382,8 @@
         }
 
         @keyframes bounce {
-
-            0%,
-            100% {
-                transform: translateX(-50%) translateY(0);
-            }
-
-            50% {
-                transform: translateX(-50%) translateY(10px);
-            }
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
         }
 
         section {
@@ -517,10 +438,7 @@
             transform: translateY(30px);
         }
 
-        .skill-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .skill-card.visible { opacity: 1; transform: translateY(0); }
 
         .skill-card:hover {
             transform: translateY(-10px);
@@ -558,6 +476,7 @@
             transform: translateY(-2px);
         }
 
+        /* ── Experience Card ── */
         .experience-card {
             background: var(--bg-card);
             padding: 3.5rem;
@@ -571,10 +490,7 @@
             transform: translateX(-30px);
         }
 
-        .experience-card.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
+        .experience-card.visible { opacity: 1; transform: translateX(0); }
 
         .experience-card::before {
             content: '';
@@ -583,6 +499,7 @@
             top: 0;
             width: 5px;
             height: 100%;
+            background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
         }
 
         .experience-card:hover {
@@ -595,7 +512,7 @@
             display: flex;
             justify-content: space-between;
             align-items: start;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             flex-wrap: wrap;
             gap: 1rem;
         }
@@ -620,6 +537,33 @@
             background: rgba(0, 255, 136, 0.1);
             border-radius: 50px;
             border: 1px solid rgba(0, 255, 136, 0.2);
+            white-space: nowrap;
+        }
+
+        /* ── Experience Description Bullets (NEW) ── */
+        .exp-description {
+            list-style: none;
+            margin-bottom: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .exp-description li {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.9rem;
+            color: var(--text-secondary);
+            font-size: 0.97rem;
+            line-height: 1.7;
+        }
+
+        .exp-description li::before {
+            content: '▸';
+            color: var(--accent-primary);
+            font-size: 0.85rem;
+            margin-top: 0.18rem;
+            flex-shrink: 0;
         }
 
         .exp-skills {
@@ -663,10 +607,7 @@
             transform: scale(0.9);
         }
 
-        .project-card.visible {
-            opacity: 1;
-            transform: scale(1);
-        }
+        .project-card.visible { opacity: 1; transform: scale(1); }
 
         .project-card:hover {
             transform: translateY(-15px) scale(1.02);
@@ -688,13 +629,9 @@
             transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .project-card:hover .project-image {
-            transform: scale(1.1);
-        }
+        .project-card:hover .project-image { transform: scale(1.1); }
 
-        .project-content {
-            padding: 2rem;
-        }
+        .project-content { padding: 2rem; }
 
         .project-content h3 {
             font-size: 1.4rem;
@@ -744,18 +681,14 @@
             font-size: 1.05rem;
         }
 
-        .project-link:hover {
-            gap: 1.2rem;
-        }
+        .project-link:hover { gap: 1.2rem; }
 
         .project-link::after {
             content: '→';
             transition: transform 0.3s;
         }
 
-        .project-link:hover::after {
-            transform: translateX(5px);
-        }
+        .project-link:hover::after { transform: translateX(5px); }
 
         .cert-grid {
             display: grid;
@@ -774,10 +707,7 @@
             transform: translateY(20px);
         }
 
-        .cert-card.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .cert-card.visible { opacity: 1; transform: translateY(0); }
 
         .cert-card::before {
             content: '🏆';
@@ -789,10 +719,7 @@
             transition: all 0.4s;
         }
 
-        .cert-card:hover::before {
-            opacity: 1;
-            transform: scale(1.2) rotate(15deg);
-        }
+        .cert-card:hover::before { opacity: 1; transform: scale(1.2) rotate(15deg); }
 
         .cert-card:hover {
             border-color: rgba(0, 255, 136, 0.4);
@@ -807,11 +734,7 @@
             font-weight: 700;
         }
 
-        .cert-meta {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            font-weight: 500;
-        }
+        .cert-meta { color: var(--text-secondary); font-size: 0.95rem; font-weight: 500; }
 
         .contact-grid {
             display: grid;
@@ -831,10 +754,7 @@
             transform: scale(0.9);
         }
 
-        .contact-item.visible {
-            opacity: 1;
-            transform: scale(1);
-        }
+        .contact-item.visible { opacity: 1; transform: scale(1); }
 
         .contact-item:hover {
             border-color: var(--accent-primary);
@@ -842,15 +762,8 @@
             box-shadow: 0 10px 30px rgba(0, 255, 136, 0.15);
         }
 
-        .contact-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .contact-icon svg {
-            width: 40px;
-            height: 40px;
-        }
+        .contact-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .contact-icon svg { width: 40px; height: 40px; }
 
         .contact-item h4 {
             font-size: 0.8rem;
@@ -861,11 +774,7 @@
             font-weight: 700;
         }
 
-        .contact-item p {
-            font-size: 1rem;
-            color: var(--text-primary);
-            font-weight: 600;
-        }
+        .contact-item p { font-size: 1rem; color: var(--text-primary); font-weight: 600; }
 
         .social-links {
             display: flex;
@@ -912,69 +821,29 @@
             border-top: 1px solid var(--border-color);
         }
 
-        footer p {
-            color: var(--text-secondary);
-            font-size: 1.05rem;
-        }
+        footer p { color: var(--text-secondary); font-size: 1.05rem; }
 
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--bg-primary); }
+        ::-webkit-scrollbar-thumb { border-radius: 5px; background: var(--accent-primary); }
 
-        ::-webkit-scrollbar-track {
-            background: var(--bg-primary);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            border-radius: 5px;
-        }
-
-        @media (max-width: 1200px) {
-            .projects-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
+        @media (max-width: 1200px) { .projects-grid { grid-template-columns: repeat(2, 1fr); } }
 
         @media (max-width: 1024px) {
-            .hero h1 {
-                font-size: 4.5rem;
-            }
-
-            .section-title {
-                font-size: 3rem;
-            }
+            .hero h1 { font-size: 4.5rem; }
+            .section-title { font-size: 3rem; }
         }
 
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 3.5rem;
-                letter-spacing: -2px;
-            }
-
-            .hero-subtitle {
-                font-size: 1.3rem;
-            }
-
-            .section-title {
-                font-size: 2.5rem;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .skills-grid,
-            .cert-grid,
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
+            .hero h1 { font-size: 3.5rem; letter-spacing: -2px; }
+            .hero-subtitle { font-size: 1.3rem; }
+            .section-title { font-size: 2.5rem; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .skills-grid, .cert-grid, .contact-grid { grid-template-columns: 1fr; }
+            .experience-card { padding: 2rem; }
         }
 
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-        }
+        @media (max-width: 480px) { .hero h1 { font-size: 2.5rem; } }
     </style>
 </head>
 
@@ -992,9 +861,7 @@
         <div class="container">
             <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">HB</div>
             <button class="mobile-menu-btn" id="mobileMenuBtn">
-                <span></span>
-                <span></span>
-                <span></span>
+                <span></span><span></span><span></span>
             </button>
             <ul class="nav-links" id="navLinks"></ul>
         </div>
@@ -1103,7 +970,7 @@
                 { text: "View Resume", href: "https://drive.google.com/file/d/1I8tNnINNlp3jzNdQ_UYCBBlaJlEtWAZe/view?usp=sharing", type: "secondary", target: "_blank" }
             ],
 
-            summary: "Aspiring AI & ML Engineer with strong foundations in machine learning, deep learning, and data-driven problem solving. Experienced in building real-world AI solutions like CURA AI, achieving 99% accurate disease prediction with personalized recommendations. Skilled in deploying ML models into full-stack applications using Flask, Django, and MERN. Currently expanding into MLOps, LLM integration, and production-level AI systems to build scalable, intelligent products.",
+            summary: "Final-year Computer Engineering student and Jr. Python Developer with real-world experience building production-grade AI/ML systems, LLM pipelines, and large-scale data automation. At Xbyte, I engineered end-to-end scraping and data pipelines processing 13M+ records for enterprise clients. I've fine-tuned Mistral 7B using QLoRA — achieving measurable gains over the base model — and built RAG-powered document assistants with sub-second response latency. I work across the full AI stack: from model training and fine-tuning to FastAPI backends, vector databases, and Docker deployments on AWS. Currently focused on Generative AI, LLM applications, and scalable intelligent systems that solve real problems.",
 
             skills: [
                 {
@@ -1136,9 +1003,16 @@
                 {
                     title: "Junior Python Developer",
                     company: "X-Byte Enterprise Solutions",
-                    location: "On-site",
-                    date: "Mar 2025 - Sep 2025",
-                    skills: ["Python", "Web Scraping", "Data Pipelines", "Database", "Machine Learning", "Excel", "Client Communication"]
+                    location: "Ahmedabad, India (On-site)",
+                    date: "Mar 2025 – Sep 2025",
+                    description: [
+                        "Scraped and processed ~13M records from a Saudi food delivery platform, building reliable end-to-end automation pipelines.",
+                        "Developed structured APIs and data pipelines to deliver analytics-ready data to enterprise clients.",
+                        "Automated weekly scraping workflows for Russian e-commerce platforms and designed acquisition pipelines for Indian quick commerce datasets.",
+                        "Performed cross-platform data mapping and transformation to ensure consistency and usability across client systems.",
+                        "Collaborated directly with clients on requirements, delivery timelines, and data quality standards."
+                    ],
+                    skills: ["Python", "Web Scraping", "Data Pipelines", "FastAPI", "MongoDB", "PostgreSQL", "Data Transformation", "Client Communication"]
                 }
             ],
 
@@ -1275,16 +1149,21 @@
         function renderExperience() {
             const container = document.getElementById('experienceContainer');
             portfolioData.experience.forEach(exp => {
+                const descriptionHTML = exp.description && exp.description.length
+                    ? `<ul class="exp-description">${exp.description.map(point => `<li>${point}</li>`).join('')}</ul>`
+                    : '';
+
                 const card = document.createElement('div');
                 card.className = 'experience-card';
                 card.innerHTML = `
                     <div class="exp-header">
                         <div class="exp-title">
                             <h3>${exp.title}</h3>
-                            <p class="exp-company">${exp.company} • ${exp.location}</p>
+                            <p class="exp-company">${exp.company} &bull; ${exp.location}</p>
                         </div>
                         <div class="exp-date">${exp.date}</div>
                     </div>
+                    ${descriptionHTML}
                     <div class="exp-skills">${exp.skills.map(skill => `<span class="exp-skill">${skill}</span>`).join('')}</div>
                 `;
                 container.appendChild(card);
@@ -1304,7 +1183,7 @@
                         <h3>${project.title}</h3>
                         <p>${project.description}</p>
                         <div class="tech-stack">${project.technologies.map(tech => `<span class="tech-badge">${tech}</span>`).join('')}</div>
-                        <a href="${project.link}" target="_blank" class="project-link">View Project</a>
+                        ${project.link ? `<a href="${project.link}" target="_blank" class="project-link">View Project</a>` : ''}
                     </div>
                 `;
                 projectsGrid.appendChild(card);
@@ -1316,7 +1195,7 @@
             portfolioData.certifications.forEach(cert => {
                 const card = document.createElement('div');
                 card.className = 'cert-card';
-                card.innerHTML = `<h4>${cert.title}</h4><p class="cert-meta">${cert.issuer} • ${cert.date}</p>`;
+                card.innerHTML = `<h4>${cert.title}</h4><p class="cert-meta">${cert.issuer} &bull; ${cert.date}</p>`;
                 certGrid.appendChild(card);
             });
         }
@@ -1341,6 +1220,7 @@
                 link.href = social.url;
                 link.target = '_blank';
                 link.className = 'social-link';
+                link.setAttribute('aria-label', social.name);
                 link.innerHTML = `<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="${social.icon}"/></svg>`;
                 socialLinks.appendChild(link);
             });
@@ -1390,8 +1270,7 @@
         }, 100);
 
         window.addEventListener('scroll', () => {
-            const navbar = document.getElementById('navbar');
-            navbar.classList.toggle('scrolled', window.pageYOffset > 100);
+            document.getElementById('navbar').classList.toggle('scrolled', window.pageYOffset > 100);
         });
 
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1431,5 +1310,4 @@
         });
     </script>
 </body>
-
 </html>
