@@ -765,27 +765,45 @@
           <div class="contact-info" id="contactInfo"></div>
           <div class="social-row" id="socialRow"></div>
         </div>
-        <form class="contact-form" id="contactForm" novalidate>
-          <div class="form-row">
-            <div class="form-field">
-              <label for="fname">NAME</label>
-              <input type="text" id="fname" name="name" placeholder="Your name" required autocomplete="name">
-            </div>
-            <div class="form-field">
-              <label for="femail">EMAIL</label>
-              <input type="email" id="femail" name="email" placeholder="your@email.com" required autocomplete="email">
-            </div>
-          </div>
-          <div class="form-field">
-            <label for="fsubject">SUBJECT</label>
-            <input type="text" id="fsubject" name="subject" placeholder="What's this about?">
-          </div>
-          <div class="form-field">
-            <label for="fmessage">MESSAGE</label>
-            <textarea id="fmessage" name="message" rows="5" placeholder="Tell me about your project or opportunity..." required></textarea>
-          </div>
-          <button type="submit" class="form-submit" id="submitBtn">Send Message →</button>
-        </form>
+        <form class="contact-form" id="contactForm"
+      action="https://api.web3forms.com/submit"
+      method="POST">
+
+  <!-- Web3Forms Access Key -->
+  <input type="hidden" name="access_key" value="d51011a8-90f1-4b54-be2f-850214ed0af5">
+
+  <!-- Optional but recommended -->
+  <input type="hidden" name="subject" value="New Portfolio Message">
+  <input type="hidden" name="from_name" value="Henil Portfolio">
+  <input type="hidden" name="reply_to" value="email">
+  <input type="checkbox" name="botcheck" style="display:none;">
+
+  <div class="form-row">
+    <div class="form-field">
+      <label for="fname">NAME</label>
+      <input type="text" id="fname" name="name" placeholder="Your name" required autocomplete="name">
+    </div>
+    <div class="form-field">
+      <label for="femail">EMAIL</label>
+      <input type="email" id="femail" name="email" placeholder="your@email.com" required autocomplete="email">
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label for="fsubject">SUBJECT</label>
+    <input type="text" id="fsubject" name="subject" placeholder="What's this about?">
+  </div>
+
+  <div class="form-field">
+    <label for="fmessage">MESSAGE</label>
+    <textarea id="fmessage" name="message" rows="5"
+      placeholder="Tell me about your project or opportunity..." required></textarea>
+  </div>
+
+  <button type="submit" class="form-submit" id="submitBtn">
+    Send Message →
+  </button>
+</form>
       </div>
     </div>
   </section>
