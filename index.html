@@ -765,9 +765,7 @@
           <div class="contact-info" id="contactInfo"></div>
           <div class="social-row" id="socialRow"></div>
         </div>
-        <form class="contact-form" id="contactForm"
-      action="https://api.web3forms.com/submit"
-      method="POST">
+           <form class="contact-form" id="contactForm">
 
   <!-- Web3Forms Access Key -->
   <input type="hidden" name="access_key" value="d51011a8-90f1-4b54-be2f-850214ed0af5">
@@ -1117,27 +1115,45 @@
     /* ═══════════════════════════════════════════════════════════
        CONTACT FORM — mailto fallback
     ═══════════════════════════════════════════════════════════ */
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-      e.preventDefault();
-      const btn = document.getElementById('submitBtn');
-      const name = document.getElementById('fname').value;
-      const email = document.getElementById('femail').value;
-      const subject = document.getElementById('fsubject').value || 'Portfolio Enquiry';
-      const message = document.getElementById('fmessage').value;
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const btn = document.getElementById('submitBtn');
 
-      const mailto = `mailto:henilbhavsar164@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name} (${email})\n\n${message}`)}`;
-      window.location.href = mailto;
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
 
-      btn.textContent = 'Opening mail client ✓';
+  const formData = new FormData(this);
+
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: formData
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      btn.textContent = 'Message Sent ✓';
       btn.classList.add('sent');
-      btn.disabled = true;
+      e.target.reset();
       setTimeout(() => {
         btn.textContent = 'Send Message →';
         btn.classList.remove('sent');
         btn.disabled = false;
-        e.target.reset();
       }, 3000);
-    });
+    } else {
+      throw new Error(data.message || 'Submission failed');
+    }
+  } catch (err) {
+    btn.textContent = 'Failed — try again';
+    btn.style.background = 'linear-gradient(135deg, #e24b4a, #a32d2d)';
+    setTimeout(() => {
+      btn.textContent = 'Send Message →';
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 3000);
+  }
+});
 
     /* ═══════════════════════════════════════════════════════════
        CHAT WIDGET
