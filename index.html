@@ -9,19 +9,16 @@
   <meta name="author" content="Henil Bhavsar">
   <meta name="robots" content="index, follow">
 
-  <!-- Open Graph -->
   <meta property="og:title" content="Henil Bhavsar — AI / ML Engineer">
   <meta property="og:description" content="Building production-grade AI systems — fine-tuned LLMs, RAG pipelines, and scalable backend infrastructure.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://henil.dev">
 
-  <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Henil Bhavsar — AI / ML Engineer">
   <meta name="twitter:description" content="Building production-grade AI systems.">
   <meta name="twitter:site" content="@Henil_164">
 
-  <!-- Preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preconnect" href="https://api.groq.com">
@@ -30,15 +27,12 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-4LRG31Y6SZ');
   </script>
-
 
   <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 
   <style>
-    /* ═══ RESET & TOKENS ═════════════════════════════════════════ */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
 
     :root {
@@ -73,12 +67,10 @@
       overflow-x: hidden;
     }
 
-    /* ═══ SCROLLBAR ══════════════════════════════════════════════ */
     ::-webkit-scrollbar { width: 3px }
     ::-webkit-scrollbar-track { background: var(--bg) }
     ::-webkit-scrollbar-thumb { background: var(--cyan); border-radius: 3px }
 
-    /* ═══ BACKGROUND EFFECTS ════════════════════════════════════ */
     .grid-bg {
       position: fixed; inset: 0; z-index: 0; pointer-events: none;
       background-image:
@@ -108,7 +100,7 @@
       66% { transform: translate(-30px,40px) scale(.95) }
     }
 
-    /* ═══ NAV ════════════════════════════════════════════════════ */
+    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 100;
       padding: 1.5rem 0; transition: var(--transition);
@@ -150,7 +142,7 @@
     }
     .nav-cta:hover { background: rgba(0,212,255,.1); box-shadow: 0 0 20px rgba(0,212,255,.2) }
 
-    /* ═══ HERO ═══════════════════════════════════════════════════ */
+    /* HERO */
     .hero {
       min-height: 100vh; display: flex; align-items: center;
       position: relative; z-index: 2; padding: 0 2rem;
@@ -221,9 +213,8 @@
       transform: translateY(-2px); box-shadow: 0 10px 30px rgba(0,212,255,.1);
     }
 
-    /* Stat cards row */
     .hero-stat-row {
-      margin-top: 4rem; display: grid; grid-template-columns: repeat(4,1fr);
+      margin-top: 4rem; display: grid; grid-template-columns: repeat(5,1fr);
       gap: 1.2rem; animation: fade-up .8s .55s both;
     }
     .hero-stat-card {
@@ -235,29 +226,15 @@
       transform: translateY(-6px); border-color: rgba(0,212,255,.25);
       box-shadow: 0 15px 40px rgba(0,0,0,.35), 0 0 30px rgba(0,212,255,.08);
     }
+    .hero-stat-card.highlight-stat {
+      border-color: rgba(124,58,237,.35);
+      background: linear-gradient(135deg, rgba(124,58,237,.08), rgba(0,212,255,.05));
+    }
+    .hero-stat-card.highlight-stat:hover { border-color: rgba(124,58,237,.55); box-shadow: 0 15px 40px rgba(0,0,0,.35), 0 0 30px rgba(124,58,237,.15) }
     .hero-stat-card h3 { font-family: var(--font-head); font-size: 2.3rem; font-weight: 800; color: var(--cyan); margin-bottom: .4rem }
+    .hero-stat-card.highlight-stat h3 { color: #a78bfa }
     .hero-stat-card p { font-size: .8rem; color: var(--muted); font-family: var(--font-mono); letter-spacing: .08em; text-transform: uppercase; line-height: 1.6 }
 
-    /* Scroll indicator */
-    .hero-scroll {
-      position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: .5rem;
-      animation: fade-up 1s 1s both; cursor: pointer; border: none; background: none;
-    }
-    .scroll-line {
-      width: 1px; height: 50px;
-      background: linear-gradient(180deg, var(--cyan), transparent);
-      animation: scroll-anim 2s infinite;
-    }
-    @keyframes scroll-anim {
-      0% { transform: scaleY(0); transform-origin: top }
-      50% { transform: scaleY(1); transform-origin: top }
-      51% { transform-origin: bottom }
-      100% { transform: scaleY(0); transform-origin: bottom }
-    }
-    .scroll-label { font-family: var(--font-mono); font-size: .65rem; color: var(--dim); letter-spacing: .15em }
-
-    /* Animations */
     @keyframes fade-up {
       from { opacity: 0; transform: translateY(20px) }
       to { opacity: 1; transform: translateY(0) }
@@ -267,7 +244,7 @@
       to { transform: translateY(0) }
     }
 
-    /* ═══ SECTIONS ═══════════════════════════════════════════════ */
+    /* SECTIONS */
     section { position: relative; z-index: 2; padding: 8rem 2rem }
     .container { max-width: 1280px; margin: 0 auto }
     .sec-label { font-family: var(--font-mono); font-size: .7rem; color: var(--cyan); letter-spacing: .2em; text-transform: uppercase; margin-bottom: .75rem }
@@ -277,7 +254,7 @@
     .reveal { opacity: 0; transform: translateY(30px); transition: opacity .7s, transform .7s }
     .reveal.in { opacity: 1; transform: translateY(0) }
 
-    /* ═══ TERMINAL ═══════════════════════════════════════════════ */
+    /* TERMINAL */
     .terminal {
       background: rgba(0,0,0,.55); border: 1px solid var(--border);
       border-radius: 24px; overflow: hidden; backdrop-filter: blur(30px);
@@ -299,7 +276,7 @@
     .cursor-blink { display: inline-block; width: 8px; height: 14px; background: var(--cyan); vertical-align: middle; animation: blink 1s infinite }
     @keyframes blink { 0%,100% { opacity: 1 } 50% { opacity: 0 } }
 
-    /* ═══ ABOUT ══════════════════════════════════════════════════ */
+    /* ABOUT */
     .about-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 4rem; align-items: center }
     .about-text { margin-bottom: 1.4rem; max-width: 650px; line-height: 1.9; font-size: 1.02rem; color: var(--muted) }
     .about-text strong { color: var(--cyan); font-weight: 600 }
@@ -321,7 +298,7 @@
       filter: blur(50px); z-index: -1;
     }
 
-    /* ═══ SKILLS ════════════════════════════════════════════════ */
+    /* SKILLS */
     .skills-modern { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px,1fr)); gap: 1.5rem; margin-top: 3rem }
     .skill-card {
       position: relative; overflow: hidden;
@@ -348,7 +325,7 @@
     }
     .skill-pill:hover { background: rgba(0,212,255,.08); border-color: rgba(0,212,255,.25); color: var(--cyan); transform: scale(1.05) }
 
-    /* ═══ EXPERIENCE ═════════════════════════════════════════════ */
+    /* EXPERIENCE */
     .timeline { position: relative; padding-left: 2.5rem }
     .timeline::before {
       content: ''; position: absolute; left: .75rem; top: 0; bottom: 0; width: 1px;
@@ -372,7 +349,96 @@
     .tl-skills { display: flex; flex-wrap: wrap; gap: .5rem }
     .tl-skill { padding: .3rem .85rem; background: rgba(0,212,255,.07); border: 1px solid rgba(0,212,255,.2); border-radius: 100px; font-size: .75rem; color: var(--cyan); font-family: var(--font-mono) }
 
-    /* ═══ PROJECTS ══════════════════════════════════════════════ */
+    /* ═══ PRODUCT SECTION ═══════════════════════════════════════ */
+    .product-hero-card {
+      position: relative; overflow: hidden; border-radius: 32px;
+      background: linear-gradient(135deg, rgba(124,58,237,.1) 0%, rgba(0,212,255,.06) 50%, rgba(124,58,237,.08) 100%);
+      border: 1px solid rgba(124,58,237,.3);
+      padding: 3.5rem; margin-top: 3rem;
+      backdrop-filter: blur(30px);
+      transition: all .4s cubic-bezier(.16,1,.3,1);
+    }
+    .product-hero-card::before {
+      content: ''; position: absolute; inset: 0; border-radius: 32px;
+      background: radial-gradient(ellipse 60% 60% at 80% 20%, rgba(124,58,237,.18), transparent 60%),
+                  radial-gradient(ellipse 40% 40% at 10% 80%, rgba(0,212,255,.12), transparent 50%);
+      pointer-events: none;
+    }
+    .product-hero-card::after {
+      content: ''; position: absolute; inset: 0; border-radius: 32px;
+      background: linear-gradient(135deg, transparent 60%, rgba(124,58,237,.05));
+      pointer-events: none;
+    }
+    .product-hero-card:hover {
+      border-color: rgba(124,58,237,.55);
+      box-shadow: 0 30px 80px rgba(0,0,0,.5), 0 0 60px rgba(124,58,237,.15);
+      transform: translateY(-4px);
+    }
+    .product-inner { display: grid; grid-template-columns: 1.2fr 1fr; gap: 4rem; align-items: center; position: relative; z-index: 2 }
+    .product-badge-row { display: flex; gap: .75rem; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap }
+    .product-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .4rem 1rem; border-radius: 100px; font-family: var(--font-mono);
+      font-size: .72rem; letter-spacing: .1em; font-weight: 500;
+    }
+    .badge-founder { background: rgba(124,58,237,.2); border: 1px solid rgba(124,58,237,.5); color: #c4b5fd }
+    .badge-live { background: rgba(74,222,128,.12); border: 1px solid rgba(74,222,128,.4); color: var(--green) }
+    .badge-live-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pulse-dot 1.5s infinite }
+    .product-name {
+      font-family: var(--font-head); font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 800; letter-spacing: -.04em; line-height: 1;
+      margin-bottom: .5rem;
+    }
+    .product-name .brand-rag { color: var(--text) }
+    .product-name .brand-ora { background: linear-gradient(135deg, var(--violet), var(--cyan)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text }
+    .product-tagline {
+      font-size: 1.1rem; color: var(--muted); line-height: 1.7;
+      margin-bottom: 2rem; max-width: 480px;
+    }
+    .product-tagline strong { color: var(--text) }
+    .product-stat-row { display: flex; gap: 2rem; margin-bottom: 2.5rem; flex-wrap: wrap }
+    .product-stat { text-align: center }
+    .product-stat-val { font-family: var(--font-head); font-size: 2.2rem; font-weight: 800; color: #a78bfa; display: block; line-height: 1 }
+    .product-stat-label { font-family: var(--font-mono); font-size: .68rem; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; display: block; margin-top: .35rem }
+    .product-stat-divider { width: 1px; background: var(--border); align-self: stretch }
+    .product-links { display: flex; gap: 1rem; flex-wrap: wrap }
+    .product-btn-primary {
+      padding: .85rem 2rem; background: linear-gradient(135deg, var(--violet), #5b21b6);
+      border-radius: var(--radius-sm); color: #fff; text-decoration: none;
+      font-weight: 600; font-size: .9rem; transition: var(--transition); display: inline-flex; align-items: center; gap: .5rem;
+    }
+    .product-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(124,58,237,.4) }
+    .product-btn-ghost {
+      padding: .85rem 2rem; border: 1px solid rgba(124,58,237,.4); border-radius: var(--radius-sm);
+      color: #c4b5fd; text-decoration: none; font-weight: 500; font-size: .9rem;
+      transition: var(--transition); display: inline-flex; align-items: center; gap: .5rem;
+    }
+    .product-btn-ghost:hover { border-color: rgba(124,58,237,.8); background: rgba(124,58,237,.1); transform: translateY(-2px) }
+    .product-features { display: flex; flex-direction: column; gap: 1rem }
+    .product-feature {
+      display: flex; align-items: flex-start; gap: 1rem; padding: 1.2rem 1.4rem;
+      background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.06);
+      border-radius: var(--radius-md); transition: var(--transition);
+    }
+    .product-feature:hover { background: rgba(124,58,237,.08); border-color: rgba(124,58,237,.25); transform: translateX(6px) }
+    .pf-icon { font-size: 1.3rem; flex-shrink: 0; line-height: 1; margin-top: .1rem }
+    .pf-text h4 { font-size: .9rem; font-weight: 600; margin-bottom: .2rem; color: var(--text) }
+    .pf-text p { font-size: .8rem; color: var(--muted); line-height: 1.5 }
+    .product-tech-stack { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.5rem; position: relative; z-index: 2 }
+    .product-tech-pill {
+      padding: .4rem .9rem; border-radius: 100px;
+      background: rgba(124,58,237,.1); border: 1px solid rgba(124,58,237,.25);
+      font-family: var(--font-mono); font-size: .72rem; color: #c4b5fd;
+      transition: var(--transition);
+    }
+    .product-tech-pill:hover { background: rgba(124,58,237,.2); border-color: rgba(124,58,237,.5); transform: scale(1.05) }
+    .product-glow {
+      position: absolute; top: -60px; right: -60px; width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(124,58,237,.25), transparent 70%);
+      filter: blur(60px); pointer-events: none; border-radius: 50%;
+    }
+
+    /* PROJECTS */
     .projects-filter { display: flex; gap: .75rem; flex-wrap: wrap; margin-bottom: 3rem }
     .filter-btn {
       padding: .5rem 1.2rem; border: 1px solid var(--border); border-radius: 100px;
@@ -401,7 +467,7 @@
     .proj-link svg { width: 12px; height: 12px; stroke: currentColor; fill: none; stroke-width: 2 }
     .proj-coming { font-family: var(--font-mono); font-size: .75rem; color: var(--dim) }
 
-    /* ═══ CERTIFICATIONS ═════════════════════════════════════════ */
+    /* CERTIFICATIONS */
     .cert-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.2rem }
     .cert-card {
       background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md);
@@ -420,7 +486,7 @@
     .cert-issuer { font-family: var(--font-mono); font-size: .72rem; color: var(--cyan) }
     .cert-date { font-family: var(--font-mono); font-size: .7rem; color: var(--dim) }
 
-    /* ═══ CODING STATS ═══════════════════════════════════════════ */
+    /* CODING STATS */
     .github-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center }
     .github-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem }
     .gs-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-md); padding: 1.5rem; text-align: center; transition: var(--transition) }
@@ -432,7 +498,7 @@
     .lc-link { font-family: var(--font-mono); font-size: .75rem; color: var(--cyan); text-decoration: none }
     .lc-link:hover { text-decoration: underline }
 
-    /* ═══ CONTACT ═══════════════════════════════════════════════ */
+    /* CONTACT */
     .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start }
     .contact-info { display: flex; flex-direction: column; gap: 1.5rem }
     .contact-item {
@@ -471,7 +537,7 @@
     .form-submit:disabled { opacity: .7; cursor: not-allowed }
     .form-submit.sent { background: linear-gradient(135deg, var(--green), #22D3EE) }
 
-    /* ═══ CHAT WIDGET ════════════════════════════════════════════ */
+    /* CHAT WIDGET */
     .chat-fab {
       position: fixed; bottom: 2rem; right: 2rem; z-index: 200; width: 56px; height: 56px;
       border-radius: 50%; background: linear-gradient(135deg, var(--cyan), var(--violet));
@@ -512,19 +578,21 @@
       50% { opacity: 1; transform: translateY(-3px) }
     }
 
-    /* ═══ FOOTER ════════════════════════════════════════════════ */
+    /* FOOTER */
     footer { position: relative; z-index: 2; padding: 3rem 2rem; border-top: 1px solid var(--border); text-align: center }
     .footer-inner { max-width: 1280px; margin: 0 auto }
     .footer-logo { font-family: var(--font-mono); font-size: .9rem; color: var(--cyan); margin-bottom: .75rem }
     .footer-copy { font-size: .82rem; color: var(--dim); font-family: var(--font-mono) }
 
-    /* ═══ HAMBURGER ══════════════════════════════════════════════ */
+    /* HAMBURGER */
     .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: .5rem }
     .hamburger span { width: 22px; height: 2px; background: var(--muted); transition: var(--transition); border-radius: 2px; display: block }
 
-    /* ═══ RESPONSIVE ═════════════════════════════════════════════ */
+    /* RESPONSIVE */
     @media (max-width: 1100px) {
       .projects-grid { grid-template-columns: repeat(2,1fr) }
+      .product-inner { grid-template-columns: 1fr; gap: 2.5rem }
+      .hero-stat-row { grid-template-columns: repeat(3,1fr) }
     }
 
     @media (max-width: 900px) {
@@ -547,6 +615,8 @@
       .cert-grid { grid-template-columns: 1fr 1fr }
       .contact-wrap { grid-template-columns: 1fr; gap: 2.5rem }
       .form-row { grid-template-columns: 1fr }
+      .product-hero-card { padding: 2rem }
+      .product-stat-row { gap: 1.2rem }
     }
 
     @media (max-width: 480px) {
@@ -557,14 +627,13 @@
 </head>
 <body>
 
-  <!-- Background layers -->
   <div class="grid-bg" aria-hidden="true"></div>
   <div class="noise" aria-hidden="true"></div>
   <div class="orb orb1" aria-hidden="true"></div>
   <div class="orb orb2" aria-hidden="true"></div>
   <div class="orb orb3" aria-hidden="true"></div>
 
-  <!-- ═══════════════ NAV ═══════════════ -->
+  <!-- NAV -->
   <nav id="nav" role="navigation" aria-label="Main navigation">
     <div class="nav-inner">
       <a href="#home" class="logo" aria-label="Henil Bhavsar — Home">
@@ -576,6 +645,7 @@
       <ul class="nav-links" id="navLinks">
         <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
         <li><a href="#experience" onclick="closeMenu()">Experience</a></li>
+        <li><a href="#products-built" onclick="closeMenu()">Products</a></li>
         <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
         <li><a href="#certifications" onclick="closeMenu()">Certs</a></li>
         <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
@@ -585,7 +655,7 @@
     </div>
   </nav>
 
-  <!-- ═══════════════ HERO ═══════════════ -->
+  <!-- HERO -->
   <section class="hero" id="home" aria-label="Hero">
     <div class="hero-wrap container">
       <div class="hero-badge" aria-label="Availability status">
@@ -616,24 +686,23 @@
           <h3>7B</h3>
           <p>Parameters Fine-Tuned</p>
         </div>
+        <div class="hero-stat-card highlight-stat">
+          <h3>150+</h3>
+          <p>Live Product Users</p>
+        </div>
         <div class="hero-stat-card">
           <h3>6+</h3>
           <p>Certifications</p>
         </div>
       </div>
     </div>
-    <!-- <button class="hero-scroll" onclick="document.getElementById('skills').scrollIntoView({behavior:'smooth'})" aria-label="Scroll to skills">
-      <span class="scroll-label">SCROLL</span>
-      <div class="scroll-line" aria-hidden="true"></div>
-    </button> -->
   </section>
 
-  <!-- ═══════════════ ABOUT ═══════════════ -->
+  <!-- ABOUT -->
   <section id="about" style="padding-top:0" aria-label="About">
     <div class="container">
       <div class="about-grid reveal">
         <div class="about-content">
-          
           <h2 class="sec-title">Who I <span class="grad">Am</span></h2>
           <p class="sec-desc about-text">
             Final-year Computer Engineering student focused on building
@@ -684,7 +753,7 @@
     </div>
   </section>
 
-  <!-- ═══════════════ SKILLS ═══════════════ -->
+  <!-- SKILLS -->
   <section id="skills" aria-label="Skills">
     <div class="container">
       <div class="reveal">
@@ -695,7 +764,7 @@
     </div>
   </section>
 
-  <!-- ═══════════════ EXPERIENCE ═══════════════ -->
+  <!-- EXPERIENCE -->
   <section id="experience" aria-label="Work Experience">
     <div class="container">
       <div class="reveal">
@@ -706,7 +775,129 @@
     </div>
   </section>
 
-  <!-- ═══════════════ PROJECTS ═══════════════ -->
+  <!-- PRODUCTS BUILT -->
+  <section id="products-built" aria-label="Products Built">
+    <div class="container">
+      <div class="reveal">
+        <div class="sec-label">Founder · Live Product</div>
+        <h2 class="sec-title">What I've <span class="grad">Built &amp; Shipped</span></h2>
+        <p class="sec-desc">Beyond client work and experiments — a real product, live users, real impact.</p>
+      </div>
+
+      <div class="product-hero-card reveal" style="transition-delay:.1s">
+        <div class="product-glow" aria-hidden="true"></div>
+        <div class="product-inner">
+
+          <!-- LEFT: Info -->
+          <div>
+            <div class="product-badge-row">
+              <span class="product-badge badge-founder">⚡ Founder &amp; Builder</span>
+              <span class="product-badge badge-live">
+                <span class="badge-live-dot" aria-hidden="true"></span>Live Product
+              </span>
+            </div>
+
+            <h2 class="product-name">
+              <span class="brand-rag">Rag</span><span class="brand-ora">ora</span><span class="brand-rag">.ai</span>
+            </h2>
+            <p style="font-family:var(--font-mono);font-size:.8rem;color:var(--muted);letter-spacing:.1em;margin-bottom:1.2rem">AI CHATBOT PLATFORM</p>
+
+            <p class="product-tagline">
+              Your website visitors are leaving because <strong>nobody replies instantly</strong>.
+              Ragora turns your documents into a smart AI assistant —
+              trained on your data, embedded on any website, live in under 3 minutes.
+            </p>
+
+            <div class="product-stat-row" aria-label="Product stats">
+              <div class="product-stat">
+                <span class="product-stat-val">150+</span>
+                <span class="product-stat-label">Live Users</span>
+              </div>
+              <div class="product-stat-divider" aria-hidden="true"></div>
+              <div class="product-stat">
+                <span class="product-stat-val">&lt;3</span>
+                <span class="product-stat-label">Min to Launch</span>
+              </div>
+              <div class="product-stat-divider" aria-hidden="true"></div>
+              <div class="product-stat">
+                <span class="product-stat-val">Any</span>
+                <span class="product-stat-label">Website Embed</span>
+              </div>
+            </div>
+
+            <div class="product-links">
+              <a href="https://ragora.ai" target="_blank" rel="noopener noreferrer" class="product-btn-primary">
+                🌍 Visit Ragora.ai
+              </a>
+              <a href="https://github.com/Henilll" target="_blank" rel="noopener noreferrer" class="product-btn-ghost">
+                GitHub ↗
+              </a>
+            </div>
+
+            <div class="product-tech-stack" aria-label="Tech stack">
+              <span class="product-tech-pill">RAG</span>
+              <span class="product-tech-pill">LangChain</span>
+              <span class="product-tech-pill">FastAPI</span>
+              <span class="product-tech-pill">Vector DB</span>
+              <span class="product-tech-pill">OAuth2</span>
+              <span class="product-tech-pill">Python</span>
+              <span class="product-tech-pill">WebSockets</span>
+              <span class="product-tech-pill">Analytics</span>
+            </div>
+          </div>
+
+          <!-- RIGHT: Features -->
+          <div class="product-features" aria-label="Key features">
+            <div class="product-feature">
+              <div class="pf-icon">⚡</div>
+              <div class="pf-text">
+                <h4>Train AI on Your Documents</h4>
+                <p>Upload your docs, PDFs, or knowledge base — the chatbot learns your business instantly.</p>
+              </div>
+            </div>
+            <div class="product-feature">
+              <div class="pf-icon">🎨</div>
+              <div class="pf-text">
+                <h4>Fully Customizable UI</h4>
+                <p>Tailor chatbot appearance and behavior to match your brand perfectly.</p>
+              </div>
+            </div>
+            <div class="product-feature">
+              <div class="pf-icon">🌐</div>
+              <div class="pf-text">
+                <h4>Embed on Any Website</h4>
+                <p>One script tag — works on any platform, no coding headaches required.</p>
+              </div>
+            </div>
+            <div class="product-feature">
+              <div class="pf-icon">🔐</div>
+              <div class="pf-text">
+                <h4>Google &amp; GitHub Auth</h4>
+                <p>Secure authentication out of the box for your team and users.</p>
+              </div>
+            </div>
+            <div class="product-feature">
+              <div class="pf-icon">📊</div>
+              <div class="pf-text">
+                <h4>Analytics &amp; Live Conversations</h4>
+                <p>See what users ask, monitor live chats, and improve responses over time.</p>
+              </div>
+            </div>
+            <div class="product-feature">
+              <div class="pf-icon">🚀</div>
+              <div class="pf-text">
+                <h4>Launch in Under 3 Minutes</h4>
+                <p>Built for startups, SaaS, e-commerce, and support teams — zero friction setup.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
   <section id="projects" aria-label="Projects">
     <div class="container">
       <div class="reveal">
@@ -718,7 +909,7 @@
     </div>
   </section>
 
-  <!-- ═══════════════ CERTIFICATIONS ═══════════════ -->
+  <!-- CERTIFICATIONS -->
   <section id="certifications" aria-label="Certifications">
     <div class="container">
       <div class="reveal">
@@ -729,7 +920,7 @@
     </div>
   </section>
 
-  <!-- ═══════════════ CODING STATS ═══════════════ -->
+  <!-- CODING STATS -->
   <section id="github" aria-label="Coding Activity">
     <div class="container">
       <div class="reveal">
@@ -752,7 +943,7 @@
     </div>
   </section>
 
-  <!-- ═══════════════ CONTACT ═══════════════ -->
+  <!-- CONTACT -->
   <section id="contact" aria-label="Contact">
     <div class="container">
       <div class="reveal">
@@ -765,48 +956,38 @@
           <div class="contact-info" id="contactInfo"></div>
           <div class="social-row" id="socialRow"></div>
         </div>
-           <form class="contact-form" id="contactForm">
-
-  <!-- Web3Forms Access Key -->
-  <input type="hidden" name="access_key" value="d51011a8-90f1-4b54-be2f-850214ed0af5">
-
-  <!-- Optional but recommended -->
-  <input type="hidden" name="subject" value="New Portfolio Message">
-  <input type="hidden" name="from_name" value="Henil Portfolio">
-  <input type="hidden" name="reply_to" value="email">
-  <input type="checkbox" name="botcheck" style="display:none;">
-
-  <div class="form-row">
-    <div class="form-field">
-      <label for="fname">NAME</label>
-      <input type="text" id="fname" name="name" placeholder="Your name" required autocomplete="name">
-    </div>
-    <div class="form-field">
-      <label for="femail">EMAIL</label>
-      <input type="email" id="femail" name="email" placeholder="your@email.com" required autocomplete="email">
-    </div>
-  </div>
-
-  <div class="form-field">
-    <label for="fsubject">SUBJECT</label>
-    <input type="text" id="fsubject" name="subject" placeholder="What's this about?">
-  </div>
-
-  <div class="form-field">
-    <label for="fmessage">MESSAGE</label>
-    <textarea id="fmessage" name="message" rows="5"
-      placeholder="Tell me about your project or opportunity..." required></textarea>
-  </div>
-
-  <button type="submit" class="form-submit" id="submitBtn">
-    Send Message →
-  </button>
-</form>
+        <form class="contact-form" id="contactForm">
+          <input type="hidden" name="access_key" value="d51011a8-90f1-4b54-be2f-850214ed0af5">
+          <input type="hidden" name="subject" value="New Portfolio Message">
+          <input type="hidden" name="from_name" value="Henil Portfolio">
+          <input type="hidden" name="reply_to" value="email">
+          <input type="checkbox" name="botcheck" style="display:none;">
+          <div class="form-row">
+            <div class="form-field">
+              <label for="fname">NAME</label>
+              <input type="text" id="fname" name="name" placeholder="Your name" required autocomplete="name">
+            </div>
+            <div class="form-field">
+              <label for="femail">EMAIL</label>
+              <input type="email" id="femail" name="email" placeholder="your@email.com" required autocomplete="email">
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="fsubject">SUBJECT</label>
+            <input type="text" id="fsubject" name="subject" placeholder="What's this about?">
+          </div>
+          <div class="form-field">
+            <label for="fmessage">MESSAGE</label>
+            <textarea id="fmessage" name="message" rows="5"
+              placeholder="Tell me about your project or opportunity..." required></textarea>
+          </div>
+          <button type="submit" class="form-submit" id="submitBtn">Send Message →</button>
+        </form>
       </div>
     </div>
   </section>
 
-  <!-- ═══════════════ FOOTER ═══════════════ -->
+  <!-- FOOTER -->
   <footer role="contentinfo">
     <div class="footer-inner">
       <div class="footer-logo">henil.dev</div>
@@ -814,34 +995,16 @@
     </div>
   </footer>
 
-  <!-- ═══════════════ CHAT WIDGET ═══════════════ -->
-  <button class="chat-fab" id="chatFab" onclick="toggleChat()" aria-label="Open AI chat assistant" aria-expanded="false">
-    <svg viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
-    </svg>
-  </button>
-  <div class="chat-window" id="chatWin" role="dialog" aria-label="AI Chat Assistant" aria-modal="true">
-    <div class="chat-header">
-      <div class="chat-avatar" aria-hidden="true">HB</div>
-      <div class="chat-hinfo">
-        <div class="chat-hname">Henil's AI Assistant</div>
-        <div class="chat-hstatus">● Online</div>
-      </div>
-      <button class="chat-close" onclick="toggleChat()" aria-label="Close chat">✕</button>
-    </div>
-    <div class="chat-msgs" id="chatMsgs" role="log" aria-live="polite">
-      <div class="msg bot">Hi! 👋 I'm Henil's AI assistant. Ask me anything about his work, skills, or projects.</div>
-    </div>
-    <div class="chat-input-row">
-      <input class="chat-input" id="chatInput" placeholder="Ask something..." aria-label="Chat message input">
-      <button class="chat-send" id="chatSendBtn" onclick="sendChat()" aria-label="Send message">Send</button>
-    </div>
-  </div>
+  <!-- CHAT WIDGET -->
+  
+  <script src="https://ragora-ai-4qof.vercel.app/widget/ragora-chat.js"
+  data-key="w_R747HI20PkHFo8PQGWYq"
+  data-mode="search"
+  data-shortcut="true"
+  data-theme="auto"
+  defer></script>
 
   <script>
-    /* ═══════════════════════════════════════════════════════════
-       DATA
-    ═══════════════════════════════════════════════════════════ */
     const DATA = {
       skills: [
         { cat: "AI / ML", icon: "🧠", items: ["Machine Learning","Deep Learning","NLP","Generative AI","RAG","LangChain","Fine-Tuning (QLoRA)","n8n Automation","Model Deployment","Data Analysis"] },
@@ -887,9 +1050,9 @@
         { icon:"🌐", title:"Intro to Programming — HTML, CSS & JavaScript",           issuer:"Johns Hopkins University",date:"Apr 2024" }
       ],
       contact: {
-        email: { label:"EMAIL", value:"henilbhavsar164@gmail.com", icon:"email" },
-        phone: { label:"PHONE", value:"+91 9714033439",            icon:"phone" },
-        location:{ label:"LOCATION", value:"Ahmedabad, Gujarat, India", icon:"location" }
+        email:    { label:"EMAIL",    value:"henilbhavsar164@gmail.com",   icon:"email" },
+        phone:    { label:"PHONE",    value:"+91 9714033439",              icon:"phone" },
+        location: { label:"LOCATION", value:"Ahmedabad, Gujarat, India",  icon:"location" }
       },
       social: [
         { name:"GitHub",    url:"https://github.com/Henilll",                              path:"M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z" },
@@ -900,18 +1063,12 @@
       ]
     };
 
-    /* ═══════════════════════════════════════════════════════════
-       ICONS
-    ═══════════════════════════════════════════════════════════ */
     const CONTACT_ICONS = {
       email: `<svg stroke-width="1.5" viewBox="0 0 24 24" stroke="currentColor" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>`,
       phone: `<svg stroke-width="1.5" viewBox="0 0 24 24" stroke="currentColor" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 01-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"/></svg>`,
       location: `<svg stroke-width="1.5" viewBox="0 0 24 24" stroke="currentColor" fill="none"><path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/></svg>`
     };
 
-    /* ═══════════════════════════════════════════════════════════
-       RENDER FUNCTIONS
-    ═══════════════════════════════════════════════════════════ */
     function renderSkills() {
       const wrap = document.getElementById('skillsModern');
       DATA.skills.forEach(skill => {
@@ -957,8 +1114,6 @@
     function renderProjects(filter = 'All') {
       const grid = document.getElementById('projGrid');
       const filterBar = document.getElementById('projFilter');
-
-      // Build filter buttons once
       if (!filterBar.children.length) {
         const cats = ['All', ...new Set(DATA.projects.map(p => p.cat))];
         cats.forEach(c => {
@@ -978,7 +1133,6 @@
           filterBar.appendChild(btn);
         });
       }
-
       grid.innerHTML = '';
       DATA.projects
         .filter(p => filter === 'All' || p.cat === filter)
@@ -1053,7 +1207,6 @@
             </div>
           </div>`;
       });
-
       const sr = document.getElementById('socialRow');
       DATA.social.forEach(s => {
         sr.innerHTML += `
@@ -1063,7 +1216,6 @@
       });
     }
 
-    // Boot
     renderSkills();
     renderExperience();
     renderProjects();
@@ -1071,9 +1223,7 @@
     renderGitHub();
     renderContact();
 
-    /* ═══════════════════════════════════════════════════════════
-       NAV — throttled scroll
-    ═══════════════════════════════════════════════════════════ */
+    /* NAV scroll */
     let ticking = false;
     window.addEventListener('scroll', () => {
       if (!ticking) {
@@ -1085,79 +1235,58 @@
       }
     }, { passive: true });
 
-    /* ═══════════════════════════════════════════════════════════
-       HAMBURGER
-    ═══════════════════════════════════════════════════════════ */
+    /* Hamburger */
     const ham = document.getElementById('ham');
     const navLinks = document.getElementById('navLinks');
-
     ham.addEventListener('click', () => {
       const isOpen = navLinks.classList.toggle('open');
       ham.setAttribute('aria-expanded', isOpen);
       document.body.style.overflow = isOpen ? 'hidden' : '';
     });
-
     function closeMenu() {
       navLinks.classList.remove('open');
       ham.setAttribute('aria-expanded', 'false');
       document.body.style.overflow = '';
     }
 
-    /* ═══════════════════════════════════════════════════════════
-       SCROLL REVEAL
-    ═══════════════════════════════════════════════════════════ */
+    /* Scroll Reveal */
     const ro = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in') });
     }, { threshold: .1, rootMargin: '0px 0px -60px 0px' });
-
     document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
-    /* ═══════════════════════════════════════════════════════════
-       CONTACT FORM — mailto fallback
-    ═══════════════════════════════════════════════════════════ */
+    /* Contact Form */
     document.getElementById('contactForm').addEventListener('submit', async function(e) {
-  e.preventDefault();
-  const btn = document.getElementById('submitBtn');
-
-  btn.textContent = 'Sending...';
-  btn.disabled = true;
-
-  const formData = new FormData(this);
-
-  try {
-    const res = await fetch('https://api.web3forms.com/submit', {
-      method: 'POST',
-      body: formData
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+      const formData = new FormData(this);
+      try {
+        const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: formData });
+        const data = await res.json();
+        if (data.success) {
+          btn.textContent = 'Message Sent ✓';
+          btn.classList.add('sent');
+          e.target.reset();
+          setTimeout(() => {
+            btn.textContent = 'Send Message →';
+            btn.classList.remove('sent');
+            btn.disabled = false;
+          }, 3000);
+        } else { throw new Error(data.message || 'Submission failed') }
+      } catch (err) {
+        btn.textContent = 'Failed — try again';
+        btn.style.background = 'linear-gradient(135deg, #e24b4a, #a32d2d)';
+        setTimeout(() => {
+          btn.textContent = 'Send Message →';
+          btn.style.background = '';
+          btn.disabled = false;
+        }, 3000);
+      }
     });
 
-    const data = await res.json();
-
-    if (data.success) {
-      btn.textContent = 'Message Sent ✓';
-      btn.classList.add('sent');
-      e.target.reset();
-      setTimeout(() => {
-        btn.textContent = 'Send Message →';
-        btn.classList.remove('sent');
-        btn.disabled = false;
-      }, 3000);
-    } else {
-      throw new Error(data.message || 'Submission failed');
-    }
-  } catch (err) {
-    btn.textContent = 'Failed — try again';
-    btn.style.background = 'linear-gradient(135deg, #e24b4a, #a32d2d)';
-    setTimeout(() => {
-      btn.textContent = 'Send Message →';
-      btn.style.background = '';
-      btn.disabled = false;
-    }, 3000);
-  }
-});
-
-    /* ═══════════════════════════════════════════════════════════
-       CHAT WIDGET
-    ═══════════════════════════════════════════════════════════ */
+    /* Chat Widget */
     function toggleChat() {
       const win = document.getElementById('chatWin');
       const fab = document.getElementById('chatFab');
@@ -1171,6 +1300,21 @@
     const PORTFOLIO_CONTEXT = `
 PERSONAL INFO:
 Name: Henil Bhavsar | Role: AI/ML Engineer | Location: Ahmedabad, Gujarat, India
+
+PRODUCT (FOUNDER):
+Name: Ragora.ai | URL: https://ragora-ai.vercel.app/
+Description: AI chatbot platform that trains on your documents and embeds on any website. Converts business knowledge into an intelligent support assistant. Live in under 3 minutes, no coding required.
+Users: 150+ live users
+Key Features:
+- Train AI on custom documents (RAG architecture)
+- Fully customizable chatbot UI & behavior
+- Embed on any website with one script tag
+- Google & GitHub OAuth2 authentication
+- Analytics dashboard + live conversation monitoring
+- Human-like answers from your own data
+- Launch in under 3 minutes
+Target: Startups, SaaS, e-commerce, support teams
+Tech Stack: RAG, LangChain, FastAPI, Vector DB, Python, WebSockets, OAuth2, Analytics
 
 EXPERIENCE:
 Company: X-Byte Enterprise Solutions | Role: Junior Python Developer | Duration: Mar 2025 – Sep 2025
@@ -1187,15 +1331,15 @@ DevOps: Docker, AWS, Git, Linux
 Libraries: PyTorch, Transformers, HuggingFace, TensorFlow, Scikit-learn, Pandas, NumPy
 
 PROJECTS:
-1. Mistral 7B Fine-Tuned LLM — QLoRA 4-bit fine-tuning on medical/legal/financial datasets. Stack: PyTorch, HuggingFace, QLoRA
-2. DocMind — RAG PDF assistant (upload → embed → search → answer). Stack: LangChain, FastAPI, Vector DB, Streamlit
-3. DataSage — AI data profiling platform. Stack: FastAPI, LangChain, Flask
-4. CuraAI — Disease prediction (99% accuracy) via text/voice symptoms. Stack: Flask, ML, NLP
-5. AI Automation Agents — 3 n8n agents (code review, YouTube, Instagram). Stack: n8n, APIs
-6. ModelForge — ML experimentation platform. Stack: Python, Streamlit
-7. AskMyPDF — PDF Q&A powered by Groq. Stack: Streamlit, pdfplumber, Groq
-8. EmotiSense — Real-time emotion recognition. Stack: Python, ML, NLP
-9. Patient Management System — Full-stack app. Stack: FastAPI, HTML, CSS, JS
+1. Mistral 7B Fine-Tuned LLM — QLoRA 4-bit fine-tuning on medical/legal/financial datasets
+2. DocMind — RAG PDF assistant
+3. DataSage — AI data profiling platform
+4. CuraAI — Disease prediction (99% accuracy)
+5. AI Automation Agents — 3 n8n agents
+6. ModelForge — ML experimentation platform
+7. AskMyPDF — PDF Q&A powered by Groq
+8. EmotiSense — Real-time emotion recognition
+9. Patient Management System — Full-stack FastAPI app
 
 CONTACT:
 Email: henilbhavsar164@gmail.com
@@ -1217,14 +1361,12 @@ LinkedIn: https://linkedin.com/in/henil-bhavsar-18b45b311
       input.value = '';
       sendBtn.disabled = true;
 
-      // User bubble
       const userMsg = document.createElement('div');
       userMsg.className = 'msg user';
       userMsg.textContent = text;
       msgs.appendChild(userMsg);
       chatHistory.push({ role: 'user', content: text });
 
-      // Typing indicator
       const typing = document.createElement('div');
       typing.className = 'msg bot';
       typing.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
@@ -1242,7 +1384,6 @@ LinkedIn: https://linkedin.com/in/henil-bhavsar-18b45b311
             temperature: 0.65
           })
         });
-
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         const data = await res.json();
         const reply = data.choices?.[0]?.message?.content?.trim() || 'Sorry, something went wrong.';
