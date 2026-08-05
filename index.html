@@ -1,0 +1,1728 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Henil Bhavsar</title>
+    <style>
+        /* One-file interactive macOS-inspired portfolio. */
+        :root {
+            --bar: rgba(247, 247, 247, .68);
+            --win: rgba(246, 247, 251, .84);
+            --ink: #202124;
+            --muted: #6b7180;
+            --blue: #007aff;
+            --line: rgba(0, 0, 0, .11)
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        html,
+        body {
+            margin: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", sans-serif;
+            color: var(--ink)
+        }
+
+        button {
+            font: inherit
+        }
+
+        .wallpaper {
+            position: fixed;
+            inset: 0;
+            z-index: -3;
+            overflow: hidden;
+            background: linear-gradient(149deg, #dce8f1 0%, #f0e5ee 40%, #d5b8e4 100%)
+        }
+
+        .wallpaper:before,
+        .wallpaper:after {
+            content: "";
+            position: absolute;
+            inset: -8%;
+            filter: blur(7px);
+            opacity: .99
+        }
+
+        .wallpaper:before {
+            background: radial-gradient(ellipse 43% 62% at 8% 82%, #2a108f 0 18%, #5c18d8 30%, #ae20d1 48%, transparent 62%), radial-gradient(ellipse 34% 50% at 33% 69%, #c021c7 0 21%, #f3a8c4 48%, transparent 68%), radial-gradient(ellipse 35% 80% at 88% 45%, #cc5d92 0 25%, #f3c1d3 58%, transparent 71%), radial-gradient(ellipse 38% 40% at 58% 85%, #8027db 0 20%, #c22fde 47%, transparent 69%);
+            transform: rotate(-5deg) scale(1.13)
+        }
+
+        .wallpaper:after {
+            background: radial-gradient(ellipse 45% 46% at 54% 32%, rgba(214, 220, 242, .8), transparent 67%), radial-gradient(ellipse 36% 50% at 36% 49%, rgba(233, 218, 238, .75), transparent 68%), linear-gradient(160deg, transparent 33%, rgba(240, 222, 238, .48) 55%, transparent 72%);
+            mix-blend-mode: screen
+        }
+
+        .menubar {
+            height: 28px;
+            position: fixed;
+            inset: 0 0 auto;
+            z-index: 50;
+            background: var(--bar);
+            backdrop-filter: blur(25px) saturate(1.5);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 14px;
+            font-size: 12px;
+            font-weight: 500;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .08)
+        }
+
+        .menubar div {
+            display: flex;
+            align-items: center;
+            gap: 18px
+        }
+
+        .apple {
+            font-size: 17px;
+            line-height: 1
+        }
+
+        .app-name {
+            font-weight: 700
+        }
+
+        .desktop {
+            height: 100%;
+            padding: 45px 22px 97px
+        }
+
+        .desktop-icons {
+            display: grid;
+            grid-template-columns: repeat(2, 90px);
+            grid-auto-rows: 115px;
+            justify-content: end;
+            gap: 5px 17px
+        }
+
+        .desk-icon {
+            border: 0;
+            background: none;
+            color: white;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, .7);
+            font-size: 12px;
+            text-align: center;
+            padding: 3px;
+            border-radius: 7px;
+            cursor: pointer
+        }
+
+        .desk-icon:focus,
+        .desk-icon:hover {
+            background: rgba(38, 109, 235, .33);
+            outline: 0
+        }
+
+        .icon-art {
+            display: grid;
+            place-items: center;
+            width: 64px;
+            height: 64px;
+            margin: 0 auto 5px;
+            font-size: 51px;
+            filter: drop-shadow(0 5px 5px rgba(0, 0, 0, .25))
+        }
+
+        .folder {
+            font-size: 58px
+        }
+
+        .doc {
+            font-size: 49px
+        }
+
+        .desk-icon small {
+            display: block;
+            line-height: 1.2
+        }
+
+        .welcome {
+            position: absolute;
+            left: 7vw;
+            top: 20vh;
+            color: white;
+            text-shadow: 0 2px 12px rgba(37, 8, 83, .5);
+            pointer-events: none
+        }
+
+        .welcome b {
+            display: block;
+            font-size: clamp(34px, 5vw, 64px);
+            letter-spacing: -.07em
+        }
+
+        .welcome span {
+            display: block;
+            font-size: 16px;
+            margin-top: 6px;
+            opacity: .92
+        }
+
+        .dock {
+            position: fixed;
+            left: 50%;
+            bottom: 9px;
+            z-index: 60;
+            transform: translateX(-50%);
+            padding: 7px 9px 9px;
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            border: 1px solid rgba(255, 255, 255, .55);
+            border-radius: 19px;
+            background: rgba(240, 241, 249, .48);
+            box-shadow: 0 10px 30px rgba(32, 21, 70, .29);
+            backdrop-filter: blur(24px) saturate(1.2)
+        }
+
+        .dock button {
+            position: relative;
+            width: 48px;
+            height: 48px;
+            border: 0;
+            border-radius: 11px;
+            display: grid;
+            place-items: center;
+            font-size: 28px;
+            background: linear-gradient(135deg, #fff, #d6d8e3);
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, .1), 0 2px 5px rgba(0, 0, 0, .19);
+            cursor: pointer;
+            transition: transform .15s
+        }
+
+        .dock button:hover {
+            transform: translateY(-12px) scale(1.17)
+        }
+
+        .dock button:after {
+            content: "";
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: #32323a;
+            position: absolute;
+            bottom: -7px
+        }
+
+        .dock .terminal-icon {
+            background: #19191d;
+            color: #f1f1f1;
+            font-size: 22px
+        }
+
+        .dock .github {
+            background: #242429;
+            color: white;
+            font-size: 20px
+        }
+
+        .dock .separator {
+            height: 39px;
+            width: 1px;
+            background: rgba(0, 0, 0, .16);
+            margin: 0 2px
+        }
+
+        .window {
+            position: absolute;
+            z-index: 10;
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+            min-width: 300px;
+            min-height: 190px;
+            border: 1px solid rgba(0, 0, 0, .16);
+            border-radius: 10px;
+            background: var(--win);
+            box-shadow: 0 22px 55px rgba(23, 15, 56, .35), 0 2px 8px rgba(0, 0, 0, .19);
+            backdrop-filter: blur(32px) saturate(1.3);
+            animation: open .22s cubic-bezier(.18, .8, .22, 1)
+        }
+
+        .window.open {
+            display: flex
+        }
+
+        .window.minimized {
+            display: none
+        }
+
+        @keyframes open {
+            from {
+                opacity: 0;
+                transform: scale(.89)
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1)
+            }
+        }
+
+        .titlebar {
+            height: 38px;
+            flex: none;
+            display: flex;
+            align-items: center;
+            padding: 0 13px;
+            gap: 8px;
+            border-bottom: 1px solid rgba(0, 0, 0, .11);
+            background: rgba(239, 240, 245, .68);
+            cursor: grab;
+            user-select: none
+        }
+
+        .titlebar:active {
+            cursor: grabbing
+        }
+
+        .traffic {
+            display: flex;
+            gap: 7px
+        }
+
+        .traffic button {
+            width: 12px;
+            height: 12px;
+            padding: 0;
+            border: 0;
+            border-radius: 50%;
+            cursor: pointer
+        }
+
+        .close {
+            background: #ff5f57
+        }
+
+        .min {
+            background: #febc2e
+        }
+
+        .max {
+            background: #28c840
+        }
+
+        .window-title {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 13px;
+            font-weight: 650
+        }
+
+        .toolbar {
+            height: 48px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 0 17px;
+            border-bottom: 1px solid var(--line);
+            font-size: 13px
+        }
+
+        .toolbar strong {
+            font-size: 14px
+        }
+
+        .toolbar .grow {
+            flex: 1
+        }
+
+        .toolbar input {
+            width: 165px;
+            border: 0;
+            border-radius: 6px;
+            padding: 6px 9px;
+            background: rgba(0, 0, 0, .07);
+            outline: none
+        }
+
+        .finder-layout {
+            display: grid;
+            grid-template-columns: 165px 1fr;
+            flex: 1;
+            min-height: 0
+        }
+
+        .sidebar {
+            padding: 12px 9px;
+            background: rgba(234, 236, 242, .55);
+            border-right: 1px solid var(--line);
+            font-size: 13px
+        }
+
+        .side-head {
+            margin: 7px 8px;
+            color: #858a96;
+            font-size: 10px;
+            font-weight: 700
+        }
+
+        .side {
+            display: block;
+            width: 100%;
+            padding: 5px 8px;
+            border: 0;
+            border-radius: 5px;
+            background: none;
+            text-align: left;
+            color: #333;
+            cursor: pointer
+        }
+
+        .side.active,
+        .side:hover {
+            background: rgba(0, 122, 255, .16)
+        }
+
+        .files {
+            overflow: auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
+            grid-auto-rows: 126px;
+            gap: 11px
+        }
+
+        .file {
+            border: 0;
+            border-radius: 7px;
+            background: transparent;
+            text-align: center;
+            color: #24252a;
+            cursor: pointer;
+            padding: 6px;
+            font-size: 12px
+        }
+
+        .file:hover,
+        .file:focus {
+            background: rgba(0, 122, 255, .15);
+            outline: 0
+        }
+
+        .file .file-art {
+            height: 75px;
+            display: grid;
+            place-items: center;
+            font-size: 57px
+        }
+
+        .file .project-art {
+            border-radius: 10px;
+            background: linear-gradient(145deg, #3b76d5, #b55bc9);
+            color: white;
+            font-size: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, .18)
+        }
+
+        .file span {
+            display: block;
+            line-height: 1.25
+        }
+
+        .about-content,
+        .resume-content,
+        .contact-content,
+        .terminal-content {
+            padding: 28px;
+            overflow: auto;
+            flex: 1
+        }
+
+        .about-top {
+            display: flex;
+            gap: 22px;
+            align-items: center
+        }
+
+        .portrait {
+            width: 104px;
+            height: 104px;
+            display: grid;
+            place-items: center;
+            flex: none;
+            border-radius: 24px;
+            background: linear-gradient(135deg, #f9c58c, #cd639b 54%, #6070e0);
+            color: white;
+            font-size: 35px;
+            font-weight: 800;
+            box-shadow: 0 7px 16px rgba(0, 0, 0, .16)
+        }
+
+        .about-top h1 {
+            font-size: 29px;
+            letter-spacing: -.05em;
+            margin: 0
+        }
+
+        .about-top p {
+            margin: 3px 0;
+            color: var(--muted)
+        }
+
+        .availability {
+            display: inline-flex;
+            margin-top: 8px;
+            padding: 4px 8px;
+            border-radius: 6px;
+            color: #157a35;
+            background: #dff8e5;
+            font-size: 12px
+        }
+
+        .availability:before {
+            content: "";
+            width: 7px;
+            height: 7px;
+            margin: 5px 5px 0 0;
+            border-radius: 50%;
+            background: #28b858
+        }
+
+        .bio {
+            margin: 24px 0 0;
+            max-width: 630px;
+            font-size: 15px;
+            line-height: 1.6
+        }
+
+        .facts {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 22px
+        }
+
+        .fact {
+            padding: 12px;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, .55);
+            border: 1px solid var(--line)
+        }
+
+        .fact b {
+            display: block;
+            font-size: 20px
+        }
+
+        .fact small {
+            color: var(--muted)
+        }
+
+        .project-detail {
+            padding: 30px;
+            overflow: auto;
+            flex: 1
+        }
+
+        .project-detail h1 {
+            margin: 0;
+            font-size: 31px;
+            letter-spacing: -.05em
+        }
+
+        .project-detail .category {
+            color: var(--blue);
+            font-size: 12px;
+            font-weight: 700;
+            margin: 4px 0 18px
+        }
+
+        .project-detail p {
+            max-width: 650px;
+            line-height: 1.6
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 5px 8px;
+            margin: 4px 3px 0 0;
+            border-radius: 6px;
+            background: #e5eefb;
+            color: #2468b3;
+            font-size: 12px
+        }
+
+        .link-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 8px 13px;
+            border-radius: 7px;
+            background: var(--blue);
+            color: white;
+            font-size: 13px;
+            font-weight: 600;
+            text-decoration: none
+        }
+
+        .skills-content {
+            padding: 23px;
+            overflow: auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px
+        }
+
+        .skill-box {
+            padding: 14px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, .5)
+        }
+
+        .skill-box b {
+            display: block;
+            margin-bottom: 9px
+        }
+
+        .skill-box span {
+            display: inline-block;
+            margin: 3px;
+            padding: 4px 7px;
+            border-radius: 5px;
+            background: #edf0f5;
+            font-size: 11px
+        }
+
+        .contact-content h1,
+        .resume-content h1 {
+            font-size: 28px;
+            letter-spacing: -.05em;
+            margin: 0 0 9px
+        }
+
+        .contact-row {
+            padding: 12px 0;
+            border-bottom: 1px solid var(--line)
+        }
+
+        .contact-row small {
+            display: block;
+            color: var(--muted);
+            font-size: 10px;
+            font-weight: 700
+        }
+
+        .contact-row a {
+            color: var(--blue);
+            text-decoration: none
+        }
+
+        .terminal-content {
+            background: #1e1f22;
+            color: #e5e5e5;
+            font: 13px/1.65 ui-monospace, SFMono-Regular, Menlo, monospace
+        }
+
+        .terminal-content .prompt {
+            color: #64d878
+        }
+
+        .terminal-content .command {
+            color: #8ab4ff
+        }
+
+        .terminal-content p {
+            margin: 0 0 5px
+        }
+
+        .terminal-input {
+            border: 0;
+            background: transparent;
+            color: white;
+            outline: 0;
+            font: inherit;
+            width: 50%
+        }
+
+        .toast {
+            position: fixed;
+            z-index: 100;
+            left: 50%;
+            top: 42px;
+            display: none;
+            transform: translateX(-50%);
+            padding: 8px 13px;
+            border-radius: 8px;
+            background: rgba(31, 32, 40, .84);
+            color: white;
+            font-size: 13px;
+            backdrop-filter: blur(12px)
+        }
+
+        .toast.show {
+            display: block
+        }
+
+        @media(max-width:650px) {
+            .desktop-icons {
+                grid-template-columns: repeat(2, 76px);
+                gap: 4px 4px
+            }
+
+            .welcome {
+                left: 20px;
+                top: 110px
+            }
+
+            .welcome b {
+                font-size: 37px
+            }
+
+            .menubar .hide-sm {
+                display: none
+            }
+
+            .dock {
+                gap: 4px
+            }
+
+            .dock button {
+                width: 39px;
+                height: 39px;
+                font-size: 22px
+            }
+
+            .dock button:nth-of-type(n+7) {
+                display: none
+            }
+
+            .window {
+                width: calc(100% - 16px) !important;
+                height: calc(100% - 110px) !important;
+                left: 8px !important;
+                top: 38px !important
+            }
+
+            .finder-layout {
+                grid-template-columns: 1fr
+            }
+
+            .sidebar {
+                display: none
+            }
+
+            .files {
+                grid-template-columns: repeat(3, 1fr);
+                padding: 10px
+            }
+
+            .about-top {
+                align-items: flex-start
+            }
+
+            .facts {
+                grid-template-columns: 1fr
+            }
+
+            .skills-content {
+                grid-template-columns: 1fr
+            }
+
+            .toolbar input {
+                display: none
+            }
+        }
+
+        .siri-icon {
+            background: linear-gradient(135deg, #fff, #e8e7f0) !important;
+            padding: 7px
+        }
+
+        .siri-orb {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: conic-gradient(from 210deg, #3979ff, #ce4eff, #ff80aa, #50e9e3, #3979ff);
+            box-shadow: inset 0 0 8px rgba(255, 255, 255, .85), 0 1px 4px rgba(0, 0, 0, .2);
+            position: relative
+        }
+
+        .siri-orb:after {
+            content: "";
+            position: absolute;
+            inset: 8px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 28%, rgba(255, 255, 255, .95), rgba(255, 255, 255, .12) 42%, transparent 62%)
+        }
+
+        .siri-window {
+            width: 420px !important;
+            height: 550px !important;
+            left: auto !important;
+            right: 6%;
+            top: 10%;
+            background: rgba(30, 31, 48, .82);
+            color: white;
+            border-color: rgba(255, 255, 255, .2)
+        }
+
+        .siri-window .titlebar {
+            background: rgba(255, 255, 255, .08);
+            border-color: rgba(255, 255, 255, .1)
+        }
+
+        .siri-main {
+            display: flex;
+            min-height: 0;
+            flex: 1;
+            flex-direction: column;
+            padding: 18px
+        }
+
+        .siri-brand {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            padding: 0 2px 15px
+        }
+
+        .siri-brand .siri-orb {
+            width: 30px;
+            height: 30px
+        }
+
+        .siri-brand b {
+            font-size: 15px
+        }
+
+        .siri-brand small {
+            display: block;
+            color: #b9bbca;
+            font-size: 11px
+        }
+
+        .chat-log {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+            flex-direction: column;
+            gap: 10px;
+            overflow: auto;
+            padding: 3px 2px
+        }
+
+        .bubble {
+            max-width: 87%;
+            padding: 10px 12px;
+            border-radius: 14px;
+            font-size: 13px;
+            line-height: 1.45
+        }
+
+        .bubble.assistant {
+            align-self: flex-start;
+            background: rgba(255, 255, 255, .12);
+            border-bottom-left-radius: 4px
+        }
+
+        .bubble.user {
+            align-self: flex-end;
+            background: linear-gradient(135deg, #2377ff, #8c5eff);
+            border-bottom-right-radius: 4px
+        }
+
+        .chat-input-wrap {
+            display: flex;
+            gap: 7px;
+            padding-top: 13px
+        }
+
+        .chat-input {
+            flex: 1;
+            min-width: 0;
+            border: 1px solid rgba(255, 255, 255, .18);
+            border-radius: 11px;
+            padding: 10px 12px;
+            background: rgba(255, 255, 255, .11);
+            color: white;
+            outline: none
+        }
+
+        .chat-input::placeholder {
+            color: #b8bbcc
+        }
+
+        .send-chat {
+            border: 0;
+            border-radius: 11px;
+            width: 42px;
+            background: linear-gradient(135deg, #4a83ff, #b052f4);
+            color: white;
+            font-size: 17px;
+            cursor: pointer
+        }
+
+        .key-row {
+            display: flex;
+            gap: 6px;
+            margin-top: 10px
+        }
+
+        .key-row input {
+            min-width: 0;
+            flex: 1;
+            border: 1px solid rgba(255, 255, 255, .13);
+            border-radius: 7px;
+            padding: 6px 8px;
+            background: rgba(0, 0, 0, .17);
+            color: white;
+            font-size: 11px;
+            outline: none
+        }
+
+        .key-row button {
+            border: 0;
+            border-radius: 7px;
+            padding: 5px 8px;
+            background: rgba(255, 255, 255, .16);
+            color: white;
+            font-size: 11px;
+            cursor: pointer
+        }
+
+        .menu-btn,
+        .status-btn {
+            border: 0;
+            background: transparent;
+            padding: 3px 5px;
+            border-radius: 5px;
+            cursor: pointer
+        }
+
+        .menu-btn:hover,
+        .status-btn:hover {
+            background: rgba(0, 0, 0, .1)
+        }
+
+        .menu-pop {
+            position: fixed;
+            z-index: 80;
+            display: none;
+            min-width: 205px;
+            padding: 6px;
+            border: 1px solid rgba(0, 0, 0, .12);
+            border-radius: 9px;
+            background: rgba(247, 247, 250, .88);
+            box-shadow: 0 14px 35px rgba(0, 0, 0, .2);
+            backdrop-filter: blur(25px);
+            animation: pop .16s both
+        }
+
+        .menu-pop.show {
+            display: block
+        }
+
+        @keyframes pop {
+            from {
+                opacity: 0;
+                transform: translateY(-5px)
+            }
+
+            to {
+                opacity: 1;
+                transform: none
+            }
+        }
+
+        .menu-pop button {
+            width: 100%;
+            border: 0;
+            border-radius: 5px;
+            padding: 6px 8px;
+            background: none;
+            text-align: left;
+            font-size: 12px;
+            cursor: pointer
+        }
+
+        .menu-pop button:hover {
+            background: #007aff;
+            color: white
+        }
+
+        .menu-pop hr {
+            border: 0;
+            border-top: 1px solid var(--line)
+        }
+
+        .calendar {
+            padding: 13px
+        }
+
+        .calendar b {
+            font-size: 18px
+        }
+
+        .control-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 9px 2px;
+            font-size: 12px
+        }
+
+        .control-row input {
+            accent-color: #007aff
+        }
+
+        .profile-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px
+        }
+
+        .profile-card {
+            padding: 15px;
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, .55);
+            text-decoration: none;
+            color: var(--ink);
+            transition: .18s
+        }
+
+        .profile-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, .13)
+        }
+
+        .profile-card i {
+            display: block;
+            font-size: 27px;
+            font-style: normal
+        }
+
+        .profile-card b {
+            display: block;
+            margin-top: 6px;
+            font-size: 12px
+        }
+
+        .wave {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 4px;
+            height: 42px;
+            margin: -7px 0 6px
+        }
+
+        .wave i {
+            width: 4px;
+            height: 9px;
+            border-radius: 9px;
+            background: linear-gradient(#62e7ff, #c65dff);
+            animation: wave 1s ease-in-out infinite
+        }
+
+        .wave i:nth-child(2) {
+            animation-delay: .1s
+        }
+
+        .wave i:nth-child(3) {
+            animation-delay: .2s
+        }
+
+        .wave i:nth-child(4) {
+            animation-delay: .3s
+        }
+
+        .wave i:nth-child(5) {
+            animation-delay: .4s
+        }
+
+        .wave i:nth-child(6) {
+            animation-delay: .5s
+        }
+
+        .wave i:nth-child(7) {
+            animation-delay: .6s
+        }
+
+        @keyframes wave {
+            50% {
+                height: 34px;
+                filter: brightness(1.35)
+            }
+        }
+
+        .boot {
+            position: fixed;
+            inset: 0;
+            z-index: 999;
+            display: grid;
+            place-content: center;
+            justify-items: center;
+            background: #000;
+            color: white;
+            transition: opacity .65s ease, visibility .65s
+        }
+
+        .boot.done {
+            opacity: 0;
+            visibility: hidden
+        }
+
+        .boot-logo {
+            width: 72px;
+            height: 82px;
+            margin-bottom: 28px;
+            filter: drop-shadow(0 0 18px rgba(255, 255, 255, .25));
+            animation: boot-logo .8s ease both
+        }
+
+        .boot-logo:before {
+            content: '●';
+            font-size: 77px;
+            line-height: .75
+        }
+
+        .boot-logo:after {
+            content: '';
+            display: block;
+            width: 27px;
+            height: 4px;
+            margin: -8px auto 0;
+            border-radius: 50%;
+            background: #000;
+            transform: rotate(-20deg)
+        }
+
+        .boot-load {
+            width: 126px;
+            height: 4px;
+            overflow: hidden;
+            border-radius: 8px;
+            background: #292929
+        }
+
+        .boot-load i {
+            display: block;
+            width: 40%;
+            height: 100%;
+            border-radius: inherit;
+            background: #eee;
+            animation: boot-load 1.55s ease-out forwards
+        }
+
+        @keyframes boot-logo {
+            from {
+                opacity: 0;
+                transform: scale(.74)
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1)
+            }
+        }
+
+        @keyframes boot-load {
+            to {
+                width: 100%
+            }
+        }
+
+        .desktop-dim {
+            position: fixed;
+            inset: 0;
+            z-index: 70;
+            pointer-events: none;
+            background: #000;
+            opacity: 0;
+            transition: opacity .12s
+        }
+
+        .top-search {
+            position: fixed;
+            z-index: 90;
+            display: none;
+            top: 44px;
+            right: 18px;
+            width: min(360px, calc(100vw - 36px));
+            padding: 10px;
+            border-radius: 11px;
+            background: rgba(248, 249, 253, .9);
+            box-shadow: 0 16px 40px rgba(0, 0, 0, .24);
+            backdrop-filter: blur(24px)
+        }
+
+        .top-search.show {
+            display: block
+        }
+
+        .top-search input {
+            width: 100%;
+            border: 0;
+            outline: none;
+            background: transparent;
+            font-size: 14px
+        }
+
+        .brand-img {
+            object-fit: contain
+        }
+
+        .linkedin-logo {
+            background: #087cb9 !important;
+            color: white !important;
+            font-weight: 800
+        }
+
+        .github-logo {
+            background: #141416 !important;
+            color: #fff !important
+        }
+
+        .apple svg {
+            width: 15px;
+            height: 15px;
+            display: block;
+            fill: #151515
+        }
+
+        .system-status {
+            gap: 7px !important
+        }
+
+        .status-btn {
+            font-size: 12px
+        }
+
+        .date-chip {
+            display: flex;
+            gap: 5px;
+            align-items: center;
+            padding: 4px 7px !important;
+            border-radius: 7px !important;
+            font-variant-numeric: tabular-nums;
+            font-weight: 600
+        }
+
+        .time-dot {
+            opacity: .45
+        }
+
+        .control-icon {
+            font-size: 15px
+        }
+
+        .welcome {
+            z-index: 1;
+            padding: 19px 22px;
+            border: 1px solid rgba(255, 255, 255, .3);
+            border-radius: 18px;
+            background: linear-gradient(135deg, rgba(22, 21, 71, .37), rgba(121, 27, 115, .18));
+            box-shadow: 0 10px 32px rgba(39, 12, 80, .2);
+            backdrop-filter: blur(15px);
+            text-shadow: none
+        }
+
+        .welcome b {
+            color: #171339;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, .35)
+        }
+
+        .welcome span {
+            color: #302360;
+            font-weight: 650;
+            text-shadow: none
+        }
+
+        .siri-desktop {
+            padding: 7px
+        }
+
+        .siri-desktop .siri-orb {
+            width: 56px;
+            height: 56px
+        }
+
+        .desktop-icons {
+            grid-auto-rows: 118px
+        }
+
+        .menu-pop .calendar {
+            min-width: 250px
+        }
+
+        .menu-pop select {
+            border: 0;
+            border-radius: 6px;
+            padding: 3px;
+            background: #e7e8ef
+        }
+
+        .menu-pop input[type=range] {
+            width: 120px
+        }
+
+        .battery-level {
+            height: 7px;
+            width: 100%;
+            margin-top: 8px;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #3bd269 0 92%, #d7d7dc 92%)
+        }
+
+        .date-chip {
+            height: 22px;
+            padding: 3px 8px !important;
+            background: rgba(255, 255, 255, .38);
+            box-shadow: inset 0 1px rgba(255, 255, 255, .55)
+        }
+
+        .date-chip:hover {
+            background: rgba(255, 255, 255, .68) !important
+        }
+
+        .date-chip #date {
+            font-weight: 500
+        }
+
+        .date-chip #clock {
+            font-weight: 750;
+            letter-spacing: .01em
+        }
+
+        .desktop-dim {
+            z-index: 65;
+            background: radial-gradient(ellipse at center, rgba(0, 0, 0, .02), rgba(0, 0, 0, .82));
+            transition: opacity .28s cubic-bezier(.2, .75, .25, 1);
+            mix-blend-mode: multiply
+        }
+
+        .control-panel {
+            width: 278px;
+            padding: 13px !important
+        }
+
+        .control-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px
+        }
+
+        .control-title b {
+            font-size: 15px
+        }
+
+        .control-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px
+        }
+
+        .cc-tile {
+            padding: 9px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, .06);
+            font-size: 11px
+        }
+
+        .cc-tile b {
+            display: block;
+            font-size: 12px;
+            margin-top: 3px
+        }
+
+        .cc-tile.active {
+            background: #0879f9;
+            color: white
+        }
+
+        .brightness-card {
+            margin-top: 8px;
+            padding: 11px;
+            border-radius: 11px;
+            background: rgba(0, 0, 0, .06)
+        }
+
+        .brightness-row {
+            display: flex;
+            align-items: center;
+            gap: 8px
+        }
+
+        .brightness-row span {
+            font-size: 15px
+        }
+
+        .mac-range {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100% !important;
+            height: 5px;
+            border-radius: 99px;
+            background: linear-gradient(90deg, #fff 0 var(--level, 100%), rgba(0, 0, 0, .18) var(--level, 100%));
+            outline: none
+        }
+
+        .mac-range::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #fff;
+            box-shadow: 0 1px 5px rgba(0, 0, 0, .35)
+        }
+
+        .brightness-label {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            font-size: 10px;
+            color: #666
+        }
+
+        .theme-row {
+            margin-top: 8px;
+            display: flex;
+            gap: 5px
+        }
+
+        .theme-row button {
+            flex: 1;
+            border: 0;
+            border-radius: 7px;
+            padding: 6px;
+            background: rgba(255, 255, 255, .66);
+            font-size: 11px
+        }
+
+        .theme-row button:hover {
+            background: #fff
+        }
+
+        .theme-row button.on {
+            background: #0879f9;
+            color: #fff
+        }
+
+        @media(max-width:650px) {
+            .date-chip #date {
+                display: none
+            }
+
+            .system-status {
+                gap: 3px !important
+            }
+
+            .status-btn {
+                padding: 3px !important
+            }
+
+            .date-chip {
+                padding: 3px 5px !important
+            }
+
+            .welcome {
+                left: 15px !important;
+                right: 15px;
+                top: 80px !important;
+                width: auto
+            }
+
+            .welcome b {
+                font-size: 34px
+            }
+
+            .desktop-icons {
+                margin-top: 120px
+            }
+
+            .menu-pop {
+                max-width: calc(100vw - 16px)
+            }
+        }
+
+        .skills-content {
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(255, 255, 255, .42), rgba(230, 235, 250, .32))
+        }
+
+        .skill-box {
+            position: relative;
+            overflow: hidden;
+            padding: 16px;
+            border-color: rgba(73, 112, 194, .17);
+            background: rgba(255, 255, 255, .68);
+            box-shadow: 0 4px 13px rgba(49, 65, 106, .08);
+            transition: transform .18s, box-shadow .18s
+        }
+
+        .skill-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 22px rgba(49, 65, 106, .16)
+        }
+
+        .skill-box:before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(#297cf8, #aa5eff)
+        }
+
+        .skill-box b {
+            font-size: 14px;
+            color: #202b48
+        }
+
+        .skill-box span {
+            border: 1px solid rgba(66, 111, 190, .1);
+            background: linear-gradient(135deg, #eff5ff, #f4efff);
+            color: #345281;
+            transition: .15s
+        }
+
+        .skill-box span:hover {
+            background: #287cf7;
+            color: white;
+            transform: translateY(-1px)
+        }
+    </style>
+</head>
+
+<body>
+    <div class="desktop-dim" id="desktopDim"></div>
+    <div class="wallpaper"></div>
+    <div class="toast" id="toast"></div>
+    <header class="menubar">
+        <div><button class="menu-btn apple" data-menu="apple" aria-label="Apple menu"><svg viewBox="0 0 50 50"
+                    aria-hidden="true">
+                    <path
+                        d="M44.527 34.75c-1.078 2.395-1.598 3.465-2.984 5.578-1.942 2.953-4.68 6.64-8.063 6.664-3.012.027-3.789-1.965-7.879-1.93-4.086.02-4.937 1.969-7.953 1.938-3.387-.032-5.977-3.352-7.918-6.301C4.3 32.43 3.727 22.734 7.082 17.578c2.375-3.657 6.129-5.805 9.656-5.805 3.594 0 5.851 1.973 8.82 1.973 2.883 0 4.637-1.977 8.793-1.977 3.141 0 6.461 1.711 8.836 4.664-7.766 4.258-6.504 15.348 1.34 18.317zM31.195 8.469c1.512-1.942 2.66-4.68 2.242-7.469-2.465.167-5.348 1.742-7.031 3.781-1.528 1.86-2.793 4.617-2.301 7.285 2.691.086 5.477-1.52 7.09-3.597z" />
+                </svg></button><button class="menu-btn app-name" data-menu="finder" id="menuApp">Finder</button><button
+                class="menu-btn hide-sm" data-menu="file">File</button><button class="menu-btn hide-sm"
+                data-menu="edit">Edit</button><button class="menu-btn hide-sm" data-menu="view">View</button><button
+                class="menu-btn hide-sm" data-menu="go">Go</button><button class="menu-btn hide-sm"
+                data-menu="window">Window</button><button class="menu-btn hide-sm" data-menu="help">Help</button></div>
+        <div class="system-status"><button class="status-btn" data-menu="wifi">◉</button><button
+                class="status-btn hide-sm" data-menu="battery">▰</button><button class="status-btn"
+                id="searchBtn">⌕</button><button class="status-btn control-icon" data-menu="control">◔</button><button
+                class="status-btn date-chip" data-menu="calendar"><span id="date"></span><span
+                    class="time-dot">·</span><span id="clock"></span></button></div>
+    </header>
+    <div class="menu-pop" id="menuPop"></div>
+    <div class="top-search" id="topSearch"><input id="globalSearch" placeholder="Search apps and projects"></div>
+    <main class="desktop">
+        <div class="welcome"><b>Hey, I’m Henil.</b><span id="roleType">AI Engineer</span></div>
+        <div class="desktop-icons"><button class="desk-icon" data-open="about"><span
+                    class="icon-art doc">👨🏻‍💻</span><small>About Henil</small></button><button class="desk-icon"
+                data-open="projects"><span class="icon-art folder">📁</span><small>Projects</small></button><button
+                class="desk-icon" data-open="skills"><span class="icon-art folder">📁</span><small>Skills &
+                    Tools</small></button><button class="desk-icon" data-open="experience"><span
+                    class="icon-art doc">📄</span><small>Experience.pdf</small></button><button class="desk-icon"
+                data-open="contact"><span class="icon-art doc">✉️</span><small>Contact me</small></button><button
+                class="desk-icon" data-open="profiles"><span
+                    class="icon-art folder">📁</span><small>Profiles</small></button><button class="desk-icon"
+                data-open="resume"><span class="icon-art doc">📑</span><small>Resume.pdf</small></button><button
+                class="desk-icon" data-open="siri"><span class="icon-art siri-desktop"><i
+                        class="siri-orb"></i></span><small>Henil AI</small></button></div>
+    </main>
+    <nav class="dock"><button data-open="about" title="About">👨🏻‍💻</button><button data-open="projects"
+            title="Projects">📁</button><button data-open="skills" title="Skills">🧠</button><button
+            data-open="experience" title="Experience">📄</button><button data-open="contact"
+            title="Mail">✉️</button><button class="terminal-icon" data-open="terminal"
+            title="Terminal">⌘_</button><button class="siri-icon" data-open="siri" title="Ask Henil AI"><i
+                class="siri-orb"></i></button><i class="separator"></i><button class="github"
+            onclick="window.open('https://github.com/Henilll','_blank')" title="GitHub">●</button></nav>
+
+    <section class="window" id="about" style="width:650px;height:470px;left:10%;top:13%">
+        <div class="titlebar">
+            <div class="traffic"><button class="close"></button><button class="min"></button><button
+                    class="max"></button></div><span class="window-title">About Henil</span>
+        </div>
+        <div class="about-content">
+            <div class="about-top">
+                <div class="portrait">HB</div>
+                <div>
+                    <h1>Henil Bhavsar</h1>
+                    <p>AI / ML Engineer & Product Builder</p><span class="availability">Available for
+                        opportunities</span>
+                </div>
+            </div>
+            <p class="bio">I build intelligent systems that turn ambitious ideas into products people can actually use.
+                My focus sits at the intersection of AI, Python, RAG systems and thoughtful product experiences.</p>
+            <div class="facts">
+                <div class="fact"><b>150+</b><small>Ragora.ai users</small></div>
+                <div class="fact"><b>13M+</b><small>Records processed</small></div>
+                <div class="fact"><b>9+</b><small>AI projects built</small></div>
+            </div>
+        </div>
+    </section>
+    <section class="window" id="projects" style="width:min(880px,80vw);height:570px;left:9%;top:9%">
+        <div class="titlebar">
+            <div class="traffic"><button class="close"></button><button class="min"></button><button
+                    class="max"></button></div><span class="window-title">Projects</span>
+        </div>
+        <div class="toolbar"><b>‹</b><b>›</b><strong>Projects</strong><span class="grow"></span><input
+                placeholder="Search projects" id="search"></div>
+        <div class="finder-layout">
+            <aside class="sidebar">
+                <div class="side-head">FAVOURITES</div><button class="side active" data-filter="all">⌂ &nbsp;
+                    Projects</button><button class="side" data-filter="ai">▣ &nbsp; AI / ML</button><button class="side"
+                    data-filter="rag">◇ &nbsp; RAG Apps</button><button class="side" data-filter="live">☁ &nbsp; Live
+                    Products</button>
+                <div class="side-head">TAGS</div><button class="side" data-filter="Python">● &nbsp;
+                    Python</button><button class="side" data-filter="FastAPI">● &nbsp; FastAPI</button><button
+                    class="side" data-filter="LangChain">● &nbsp; LangChain</button><button class="side"
+                    data-filter="RAG">● &nbsp; RAG</button><button class="side" data-filter="Vector DB">● &nbsp; Vector
+                    DB</button>
+            </aside>
+            <div class="files" id="projectFiles"></div>
+        </div>
+    </section>
+    <section class="window" id="projectDetail" style="width:650px;height:460px;left:18%;top:17%">
+        <div class="titlebar">
+            <div class="traffic"><button class="close"></button><button class="min"></button><button
+                    class="max"></button></div><span class="window-title">Project Preview</span>
+        </div>
+        <article class="project-detail" id="detailContent"></article>
+    </section>
+    <section class="window" id="skills" style="width:680px;height:480px;left:22%;top:13%">
+        <div class="titlebar">
+            <div class="traffic"><button class="close"></button><button class="min"></button><button
+                    class="max"></button></div><span class="window-title">Skills & Tools</span>
+        </div>
+        <div class="skills-content" id="skillContent"></div>
+    </section>
+    <section class="window" id="experience" style="width:650px;height:465px;left:26%;top:17%">
+        <div class="titlebar">
+            <div class="traffic"><button class="close"></button><button class="min"></button><button
+                    class="max"></button></div><span class="window-title">Experience.pdf</span>
+        </div>
+        <article class="resume-content">
+            <h1>Junior Python Developer</h1>
+            <p style="color:#007aff;font-weight:600;margin-top:0">X-Byte Enterprise Solutions · Ahmedabad</p>
+            <p><b>Mar 2025 — Sep 2025</b></p>
+            <ul>
+                <li>Scraped and processed ~13M records from a Saudi food delivery platform.</li>
+                <li>Developed APIs and data pipelines for enterprise analytics clients.</li>
+                <li>Automated e-commerce scraping workflows and acquisition pipelines.</li>
+                <li>Collaborated with clients on requirements, delivery and data quality.</li>
+            </ul>
+            <div><span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">MongoDB</span><span
+                    class="tag">PostgreSQL</span></div>
+        </article>
+    </section>
+    <section class="window" id="resume" style="width:560px;height:375px;left:30%;top:20%">
+        <div class="titlebar">
+            <div class="traffic"><button class="close"></button><button class="min"></button><button
+                    class="max"></button></div><span class="window-title">Resume.pdf</span>
+        </div>
+        <article class="resume-content">
+            <h1>Henil Bhavsar</h1>
+            <p>AI / ML Engineer · Ahmedabad, India</p>
+            <p>Full resume is ready to share. Get in touch for my experience, education and project details.</p><a
+                class="link-button" href="mailto:henilbhavsar164@gmail.com?subject=Resume%20Request">Request resume
+                →</a>
+        </article>
+    </section>
+    <section class="window" id="contact" style="width:520px;height:390px;left:34%;top:18%">
+        <div class="titlebar">
+            <div class="traffic"><button class="close"></button><button class="min"></button><button
+                    class="max"></button></div><span class="window-title">Contact me</span>
+        </div>
+        <article class="contact-content">
+            <h1>Let’s build something useful.</h1>
+            <p>For projects, collaborations or a quick hello.</p>
+            <div class="contact-row"><small>EMAIL</small><a
+                    href="mailto:henilbhavsar164@gmail.com">henilbhavsar164@gmail.com</a></div>
+            <div class="contact-row"><small>LINKEDIN</small><a
+                    href="https://www.linkedin.com/in/henil-bhavsar-18b45b311"
+                    target="_blank">henil-bhavsar-18b45b311</a></div>
+            <div class="contact-row"><small>LOCATION</small>Ahmedabad, Gujarat, India</div>
+        </article>
+    </section>
+    <section class="window" id="terminal" style="width:680px;height:400px;left:16%;top:19%">
+        <div class="titlebar">
+            <div class="traffic"><button class="close"></button><button class="min"></button><button
+                    class="max"></button></div><span class="window-title">henil@portfolio — zsh</span>
+        </div>
+        <div class="terminal-content" id="terminalContent">
+            <p>Last login: today on portfolio.local</p>
+            <p>Type <span class="command">help</span> to see available commands.</p>
+            <p><span class="prompt">henil@portfolio ~ % </span><input class="terminal-input" id="termInput" autofocus>
+            </p>
+        </div>
+    </section>
+    <section class="window siri-window" id="siri">
+        <div class="titlebar">
+            <div class="traffic"><button class="close"></button><button class="min"></button><button
+                    class="max"></button></div><span class="window-title">Henil AI</span>
+        </div>
+        <div class="siri-main">
+            <div class="siri-brand"><i class="siri-orb"></i>
+                <div><b>Henil AI</b><small>Portfolio assistant · Powered by Groq</small></div>
+            </div>
+            <div class="wave"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+            <div class="chat-log" id="chatLog">
+                <div class="bubble assistant">Hi! I’m Henil AI. Ask me about Henil’s projects, skills, experience, or
+                    Ragora.ai.</div>
+            </div>
+            <div class="chat-input-wrap"><input id="chatInput" class="chat-input" placeholder="Ask about Henil…"><button
+                    class="send-chat" id="sendChat">↑</button></div>
+        </div>
+    </section>
+    <section class="window" id="profiles" style="width:570px;height:370px;left:29%;top:20%">
+        <div class="titlebar">
+            <div class="traffic"><button class="close"></button><button class="min"></button><button
+                    class="max"></button></div><span class="window-title">Profiles</span>
+        </div>
+        <article class="resume-content">
+            <h1>Find Henil online.</h1>
+            <div class="profile-grid"><a class="profile-card" href="https://github.com/Henilll"
+                    target="_blank"><i>●</i><b>GitHub</b></a><a class="profile-card"
+                    href="https://www.linkedin.com/in/henil-bhavsar-18b45b311"
+                    target="_blank"><i>in</i><b>LinkedIn</b></a><a class="profile-card"
+                    href="https://leetcode.com/u/Henil_164/" target="_blank"><i>⌁</i><b>LeetCode</b></a><a
+                    class="profile-card" href="#"
+                    onclick="closeWindow(document.querySelector('#profiles'))"><i>⌂</i><b>Portfolio</b></a><a
+                    class="profile-card" href="mailto:henilbhavsar164@gmail.com"><i>✉</i><b>Email</b></a></div>
+        </article>
+    </section>
+    <script>
+        const projectData = [
+            ['Ragora.ai', 'Live Product', 'An AI chatbot platform that turns business documents into a smart assistant, embeddable on any website in under three minutes.', ['RAG', 'LangChain', 'FastAPI', 'Vector DB', 'OAuth2'], 'https://ragora-ai.vercel.app/', '⚡'],
+            ['Mistral 7B', 'LLM', 'Fine-tuned Mistral 7B using QLoRA on medical, legal and financial datasets.', ['PyTorch', 'HuggingFace', 'QLoRA'], 'https://huggingface.co/henil164/mistral-7b-medlexfin', '✦'],
+            ['DataSage', 'AI App', 'Conversational AI for automatic data profiling, visualisation and quality checks.', ['Python', 'FastAPI', 'LangChain'], 'https://datasage-ai.onrender.com/', '◈'],
+            ['DocMind', 'RAG App', 'Upload PDFs and get precise context-aware answers through a RAG assistant.', ['RAG', 'LangChain', 'Vector DB'], 'https://github.com/Henilll/DocMind', '▤'],
+            ['CuraAI', 'ML App', 'A symptom-based healthcare assistant powered by an accurate ML model.', ['Python', 'ML', 'Flask', 'NLP'], 'https://github.com/Henilll/CuraAI', '✚'],
+            ['ModelForge', 'ML Platform', 'A modern AI/ML experimentation platform for building and evaluating models.', ['Python', 'ML', 'Streamlit'], 'https://modelforge-ai.streamlit.app/', '⌘'],
+            ['AskMyPDF', 'NLP App', 'Ask questions of uploaded PDFs with instant AI-powered answers.', ['Groq AI', 'NLP', 'Streamlit'], 'https://askmypdf-henil.streamlit.app/', '▧'],
+            ['EmotiSense', 'ML App', 'Emotion recognition from facial expressions and text in real time.', ['Python', 'Deep Learning', 'NLP'], 'https://emotisense-ai.streamlit.app/', '☺'],
+            ['Patient Management', 'Full Stack', 'Modern patient record management system with FastAPI backend.', ['FastAPI', 'Python', 'JavaScript'], 'https://patient-management-systemm.netlify.app/', '✚']];
+        const skills = [['🧠 AI / ML', ['Machine Learning', 'Deep Learning', 'NLP', 'Generative AI', 'RAG', 'LangChain', 'LangGraph', 'Fine-Tuning']], ['⚡ Backend', ['Python', 'FastAPI', 'Flask', 'Django', 'REST APIs', 'WebSockets', 'OAuth2']], ['🗄 Databases', ['MongoDB', 'MySQL', 'PostgreSQL', 'Vector Databases', 'Redis']], ['🚀 DevOps & Tools', ['Docker', 'AWS', 'Git', 'GitHub', 'Postman', 'Swagger', 'Linux']]];
+        const files = document.querySelector('#projectFiles'); function renderFiles(items = projectData) {files.innerHTML = items.map((p, i) => `<button class="file" data-project="${projectData.indexOf(p)}"><span class="file-art project-art">${p[5]}</span><span>${p[0]}</span><small>${p[1]}</small></button>`).join('')}; renderFiles(); document.querySelector('#skillContent').innerHTML = skills.map(s => `<article class="skill-box"><b>${s[0]}</b>${s[1].map(i => `<span>${i}</span>`).join('')}</article>`).join('');
+        let z = 20; function openWindow(id) {const w = document.getElementById(id); w.classList.add('open'); w.classList.remove('minimized'); w.style.zIndex = ++z; document.querySelector('#menuApp').textContent = id === 'projects' ? 'Finder' : id === 'terminal' ? 'Terminal' : 'Henil Bhavsar'} function closeWindow(w) {w.classList.remove('open'); document.querySelector('#menuApp').textContent = 'Finder'} document.querySelectorAll('[data-open]').forEach(b => b.onclick = () => openWindow(b.dataset.open)); document.querySelectorAll('.window').forEach(w => {w.addEventListener('mousedown', () => w.style.zIndex = ++z); w.querySelector('.close').onclick = () => closeWindow(w); w.querySelector('.min').onclick = () => w.classList.add('minimized'); w.querySelector('.max').onclick = () => {w.style.left = '4%'; w.style.top = '35px'; w.style.width = '92vw'; w.style.height = 'calc(100vh - 135px)'}; let drag, bar = w.querySelector('.titlebar'); bar.addEventListener('pointerdown', e => {if (e.target.tagName === 'BUTTON') return; drag = {x: e.clientX - w.offsetLeft, y: e.clientY - w.offsetTop}; bar.setPointerCapture(e.pointerId)}); bar.addEventListener('pointermove', e => {if (!drag) return; w.style.left = Math.max(0, e.clientX - drag.x) + 'px'; w.style.top = Math.max(29, e.clientY - drag.y) + 'px'}); bar.addEventListener('pointerup', () => drag = null)});
+        files.onclick = e => {const btn = e.target.closest('[data-project]'); if (!btn) return; const p = projectData[btn.dataset.project]; document.querySelector('#detailContent').innerHTML = `<h1>${p[0]}</h1><div class="category">${p[1].toUpperCase()}</div><p>${p[2]}</p><div>${p[3].map(t => `<span class="tag">${t}</span>`).join('')}</div><a class="link-button" target="_blank" href="${p[4]}">Open project ↗</a>`; openWindow('projectDetail')}; document.querySelector('#search').oninput = e => renderFiles(projectData.filter(p => p[0].toLowerCase().includes(e.target.value.toLowerCase()) || p[1].toLowerCase().includes(e.target.value.toLowerCase())));
+        function time() {let d = new Date(); date.textContent = d.toLocaleDateString([], {weekday: 'short', month: 'short', day: 'numeric'}); clock.textContent = d.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})} time(); setInterval(time, 1000);
+        const termAnswers = {help: 'Available: help, about, projects, ragora, skills, experience, contact, github, linkedin, resume, ls, whoami, date, clear.', about: 'Henil Bhavsar — AI / ML engineer, Python developer and founder of Ragora.ai.', projects: 'Ragora.ai · Mistral 7B · DataSage · DocMind · CuraAI · ModelForge · AskMyPDF · EmotiSense · Patient Management.', ragora: 'Ragora.ai turns business documents into an embeddable RAG chatbot. 150+ live users; launch in under 3 minutes.', skills: 'Python · FastAPI · RAG · LangChain · LangGraph · PyTorch · HuggingFace · Docker · AWS · PostgreSQL.', experience: 'Junior Python Developer at X-Byte Enterprise Solutions (Mar 2025 — Sep 2025). Processed 13M+ records and built data pipelines.', contact: 'Email: henilbhavsar164@gmail.com | Ahmedabad, India', github: 'https://github.com/Henilll', linkedin: 'https://www.linkedin.com/in/henil-bhavsar-18b45b311', resume: 'Open Resume.pdf from the desktop.', ls: 'About-Henil.app  Projects/  Skills-and-Tools/  Experience.pdf  Resume.pdf  Contact.app', whoami: 'henil — builder of useful AI experiences.', date: () => new Date().toString()};
+        function printTerm(text, kind = '') {let p = document.createElement('p'); if (kind === 'cmd') p.innerHTML = `<span class="prompt">henil@portfolio ~ % </span><span class="command">${text}</span>`; else p.textContent = text; terminalContent.insertBefore(p, terminalContent.lastElementChild); terminalContent.scrollTop = terminalContent.scrollHeight} termInput.addEventListener('keydown', e => {if (e.key !== 'Enter') return; let c = e.target.value.trim().toLowerCase(); if (!c) return; if (c === 'clear') {terminalContent.querySelectorAll('p:not(:last-child)').forEach(p => p.remove()); e.target.value = ''; return } printTerm(c, 'cmd'); if (c === 'siri' || c === 'ask') openWindow('siri'); else printTerm(typeof termAnswers[c] === 'function' ? termAnswers[c]() : termAnswers[c] ?? `zsh: command not found: ${c}`); e.target.value = ''});
+        const chatLog = document.querySelector('#chatLog'), chatInput = document.querySelector('#chatInput'); function bubble(text, role) {let div = document.createElement('div'); div.className = 'bubble ' + role; div.textContent = text; chatLog.appendChild(div); chatLog.scrollTop = chatLog.scrollHeight; return div} async function sendChat() {let message = chatInput.value.trim(); if (!message) return; bubble(message, 'user'); chatInput.value = ''; let pending = bubble('Henil AI is thinking…', 'assistant'); try {let response = await fetch('/.netlify/functions/siri', {method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({messages: [{role: 'user', content: message}]})}); let data = await response.json(); if (!response.ok) throw Error(data.error || 'Henil AI is unavailable'); pending.textContent = data.reply} catch (err) {pending.textContent = 'Henil AI needs its server-side GROQ_API_KEY configured in Netlify. ' + err.message} } document.querySelector('#sendChat').onclick = sendChat; chatInput.addEventListener('keydown', e => {if (e.key === 'Enter') sendChat()});
+        document.querySelectorAll('.side[data-filter]').forEach(btn => btn.onclick = () => {document.querySelectorAll('.side[data-filter]').forEach(x => x.classList.remove('active')); btn.classList.add('active'); let f = btn.dataset.filter; let filtered = f === 'all' ? projectData : f === 'ai' ? projectData.filter(p => /AI|ML|LLM|NLP/.test(p[1])) : f === 'rag' ? projectData.filter(p => p[1].includes('RAG') || p[3].includes('RAG')) : f === 'live' ? projectData.filter(p => p[0] === 'Ragora.ai' || p[1].includes('Platform')) : projectData.filter(p => p[3].includes(f)); files.animate([{opacity: .25, transform: 'scale(.98)'}, {opacity: 1, transform: 'none'}], {duration: 190}); renderFiles(filtered)});
+        const menuPop = document.querySelector('#menuPop'), menus = {apple: ['About This Portfolio', 'System Settings…', 'Sleep', 'Restart…'], finder: ['About Finder', 'Preferences…', 'Empty Trash'], file: ['New Finder Window', 'Open', 'Close Window'], edit: ['Undo', 'Redo', 'Cut', 'Copy', 'Paste'], view: ['as Icons', 'as List', 'Use Stacks'], go: ['Recents', 'Documents', 'Downloads', 'Projects'], window: ['Minimize', 'Zoom', 'Bring All to Front'], help: ['Portfolio Help', 'Open Henil AI'], wifi: ['Wi‑Fi: Connected', 'Home Network', 'Open Network Settings…'], battery: ['Battery: 92%', 'Power Source: Battery'], calendar: ['calendar'], control: ['control']}; document.querySelectorAll('[data-menu]').forEach(btn => btn.onclick = e => {e.stopPropagation(); let type = btn.dataset.menu, rect = btn.getBoundingClientRect(); menuPop.innerHTML = ''; menuPop.style.left = Math.min(rect.left, innerWidth - 220) + 'px'; menuPop.style.top = (rect.bottom + 4) + 'px'; if (type === 'calendar') menuPop.innerHTML = `<div class="calendar"><b>${new Date().toLocaleDateString([], {month: 'long', year: 'numeric'})}</b><p>${new Date().toLocaleDateString([], {weekday: 'long', month: 'long', day: 'numeric'})}</p></div>`; else if (type === 'control') menuPop.innerHTML = '<div class="calendar"><b>Control Center</b><div class="control-row">Appearance <select id="theme"><option value="auto">Auto</option><option value="light">Light</option><option value="dark">Dark</option></select></div><div class="control-row">Brightness <input id="brightness" type="range" min="55" max="115" value="100"></div></div>'; else menuPop.innerHTML = menus[type].map(x => `<button>${x}</button>`).join(''); menuPop.classList.add('show'); if (type === 'control') {theme.value = localStorage.theme || 'auto'; theme.onchange = () => {localStorage.theme = theme.value; document.body.style.filter = theme.value === 'dark' ? 'brightness(.72) contrast(1.1)' : theme.value === 'light' ? 'brightness(1.08)' : ''}; brightness.oninput = () => {document.body.style.filter = `brightness(${brightness.value}%)`}} }); document.addEventListener('click', () => menuPop.classList.remove('show')); let roles = ['AI Engineer', 'Generative AI Developer', 'Python Developer'], ri = 0; setInterval(() => {ri = (ri + 1) % roles.length; roleType.textContent = roles[ri]}, 2200); document.addEventListener('keydown', e => {if (e.key === 'Escape') document.querySelectorAll('.window.open').forEach(closeWindow)});
+        menuPop.addEventListener('click', e => {let action = e.target.textContent; if (!action) return; if (action.includes('Projects')) openWindow('projects'); else if (action.includes('Henil AI')) openWindow('siri'); else if (action.includes('Close')) document.querySelectorAll('.window.open').forEach(closeWindow); else if (action.includes('Minimize')) document.querySelectorAll('.window.open').forEach(w => w.classList.add('minimized')); else if (action.includes('Preferences') || action.includes('Settings')) {menuPop.classList.remove('show'); document.querySelector('[data-menu="control"]').click()} else {toast.textContent = action; toast.classList.add('show'); setTimeout(() => toast.classList.remove('show'), 1300)} }); searchBtn.onclick = e => {e.stopPropagation(); topSearch.classList.toggle('show'); if (topSearch.classList.contains('show')) globalSearch.focus()}; globalSearch.oninput = e => {let p = projectData.find(x => x[0].toLowerCase().includes(e.target.value.toLowerCase())); if (p) {openWindow('projects'); renderFiles([p])} };
+        const savedBrightness = Number(localStorage.getItem('henilBrightness') || 100); desktopDim.style.opacity = Math.max(0, (100 - savedBrightness) / 115); document.addEventListener('input', e => {if (e.target.id === 'brightness') {let value = Number(e.target.value); desktopDim.style.opacity = Math.max(0, (100 - value) / 115); localStorage.setItem('henilBrightness', value)} }); document.addEventListener('click', e => {if (e.target.dataset.menu === 'battery') {setTimeout(() => {let panel = menuPop.querySelector('.calendar'); if (panel) panel.innerHTML = '<b>Battery</b><div class="battery-level"></div><p style="font-size:12px">92% · Power source: Battery</p>'}, 0)} });
+        const controlButton = document.querySelector('[data-menu="control"]'); controlButton.onclick = e => {e.stopPropagation(); let r = controlButton.getBoundingClientRect(); menuPop.style.left = Math.min(r.left, innerWidth - 290) + 'px'; menuPop.style.top = (r.bottom + 5) + 'px'; menuPop.innerHTML = '<div class="calendar control-panel"><div class="control-title"><b>Control Center</b><span>⌁</span></div><div class="control-grid"><div class="cc-tile active">◉<b>Wi‑Fi</b><small>Connected</small></div><div class="cc-tile">◔<b>Focus</b><small>Off</small></div></div><div class="brightness-card"><div class="brightness-row"><span>☀</span><input class="mac-range" id="brightness" type="range" min="45" max="100"><span>☀</span></div><div class="brightness-label"><span>Display</span><span id="brightnessValue"></span></div></div><div class="theme-row"><button data-theme="light">Light</button><button data-theme="auto">Auto</button><button data-theme="dark">Dark</button></div></div>'; let slider = document.querySelector('#brightness'); slider.value = Number(localStorage.getItem('henilBrightness') || 100); slider.style.setProperty('--level', slider.value + '%'); brightnessValue.textContent = slider.value + '%'; slider.oninput = () => {desktopDim.style.opacity = (100 - slider.value) / 75; slider.style.setProperty('--level', slider.value + '%'); brightnessValue.textContent = slider.value + '%'; localStorage.setItem('henilBrightness', slider.value)}; document.querySelectorAll('[data-theme]').forEach(b => {b.classList.toggle('on', (localStorage.theme || 'auto') === b.dataset.theme); b.onclick = () => {localStorage.theme = b.dataset.theme; document.body.classList.toggle('dark-ui', b.dataset.theme === 'dark'); document.querySelectorAll('[data-theme]').forEach(x => x.classList.toggle('on', x === b))}}); menuPop.classList.add('show')};
+        document.querySelector('#resume .link-button').href = 'https://drive.google.com/file/d/1266furZjHQnJssyXP7pgeTN0qH1Lphjp/view?usp=sharing'; document.querySelector('#resume .link-button').target = '_blank'; document.querySelector('#resume .link-button').rel = 'noopener noreferrer'; document.querySelector('#resume .link-button').textContent = 'Open resume ↗'; document.querySelector('.dock .github').innerHTML = '<svg viewBox="0 0 24 24" width="23" height="23" aria-hidden="true"><path fill="currentColor" d="M12 2C6.477 2 2 6.477 2 12c0 4.42 2.865 8.17 6.839 9.49.5.092.682-.217.682-.482 0-.237-.008-.866-.013-1.7-2.782.603-3.369-1.34-3.369-1.34-.454-1.156-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.831.092-.646.35-1.086.636-1.336-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0112 6.836c.85.004 1.705.114 2.504.336 1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.203 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.167 22 16.418 22 12c0-5.523-4.477-10-10-10z"/></svg>';
+    </script>
+</body>
+
+</html>
