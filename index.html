@@ -1708,7 +1708,66 @@
             ['AskMyPDF', 'NLP App', 'Ask questions of uploaded PDFs with instant AI-powered answers.', ['Groq AI', 'NLP', 'Streamlit'], 'https://askmypdf-henil.streamlit.app/', '▧'],
             ['EmotiSense', 'ML App', 'Emotion recognition from facial expressions and text in real time.', ['Python', 'Deep Learning', 'NLP'], 'https://emotisense-ai.streamlit.app/', '☺'],
             ['Patient Management', 'Full Stack', 'Modern patient record management system with FastAPI backend.', ['FastAPI', 'Python', 'JavaScript'], 'https://patient-management-systemm.netlify.app/', '✚']];
-        const skills = [['🧠 AI / ML', ['Machine Learning', 'Deep Learning', 'NLP', 'Generative AI', 'RAG', 'LangChain', 'LangGraph', 'Fine-Tuning']], ['⚡ Backend', ['Python', 'FastAPI', 'Flask', 'Django', 'REST APIs', 'WebSockets', 'OAuth2']], ['🗄 Databases', ['MongoDB', 'MySQL', 'PostgreSQL', 'Vector Databases', 'Redis']], ['🚀 DevOps & Tools', ['Docker', 'AWS', 'Git', 'GitHub', 'Postman', 'Swagger', 'Linux']]];
+        const skills = [
+  ['🧠 AI / ML', [
+    'Machine Learning',
+    'Deep Learning',
+    'NLP',
+    'Generative AI',
+    'LLMs',
+    'Prompt Engineering',
+    'AI Agents',
+    'RAG',
+    'LangChain',
+    'LangGraph',
+    'Fine-Tuning (QLoRA)',
+    'Model Deployment'
+  ]],
+
+  ['⚡ Backend', [
+    'Python',
+    'FastAPI',
+    'Flask',
+    'REST APIs',
+    'WebSockets',
+    'OAuth2',
+    'JWT'
+  ]],
+
+  ['🗄 Databases', [
+    'Vector Databases',
+    'MongoDB',
+    'MySQL',
+    'PostgreSQL'
+  ]],
+
+  ['📊 Data & ML Libraries', [
+    'TensorFlow',
+    'Scikit-learn',
+    'Pandas',
+    'NumPy',
+    'HuggingFace Transformers'
+  ]],
+
+  ['🚀 DevOps & Tools', [
+    'Docker',
+    'AWS (EC2, S3)',
+    'Git',
+    'GitHub',
+    'Postman',
+    'Swagger',
+    'Linux',
+    'n8n Workflow Automation'
+  ]],
+
+  ['💻 Programming', [
+    'Python',
+    'SQL',
+    'JavaScript',
+    'HTML',
+    'CSS'
+  ]]
+];
         const files = document.querySelector('#projectFiles'); function renderFiles(items = projectData) {files.innerHTML = items.map((p, i) => `<button class="file" data-project="${projectData.indexOf(p)}"><span class="file-art project-art">${p[5]}</span><span>${p[0]}</span><small>${p[1]}</small></button>`).join('')}; renderFiles(); document.querySelector('#skillContent').innerHTML = skills.map(s => `<article class="skill-box"><b>${s[0]}</b>${s[1].map(i => `<span>${i}</span>`).join('')}</article>`).join('');
         let z = 20; function openWindow(id) {const w = document.getElementById(id); w.classList.add('open'); w.classList.remove('minimized'); w.style.zIndex = ++z; document.querySelector('#menuApp').textContent = id === 'projects' ? 'Finder' : id === 'terminal' ? 'Terminal' : 'Henil Bhavsar'} function closeWindow(w) {w.classList.remove('open'); document.querySelector('#menuApp').textContent = 'Finder'} document.querySelectorAll('[data-open]').forEach(b => b.onclick = () => openWindow(b.dataset.open)); document.querySelectorAll('.window').forEach(w => {w.addEventListener('mousedown', () => w.style.zIndex = ++z); w.querySelector('.close').onclick = () => closeWindow(w); w.querySelector('.min').onclick = () => w.classList.add('minimized'); w.querySelector('.max').onclick = () => {w.style.left = '4%'; w.style.top = '35px'; w.style.width = '92vw'; w.style.height = 'calc(100vh - 135px)'}; let drag, bar = w.querySelector('.titlebar'); bar.addEventListener('pointerdown', e => {if (e.target.tagName === 'BUTTON') return; drag = {x: e.clientX - w.offsetLeft, y: e.clientY - w.offsetTop}; bar.setPointerCapture(e.pointerId)}); bar.addEventListener('pointermove', e => {if (!drag) return; w.style.left = Math.max(0, e.clientX - drag.x) + 'px'; w.style.top = Math.max(29, e.clientY - drag.y) + 'px'}); bar.addEventListener('pointerup', () => drag = null)});
         files.onclick = e => {const btn = e.target.closest('[data-project]'); if (!btn) return; const p = projectData[btn.dataset.project]; document.querySelector('#detailContent').innerHTML = `<h1>${p[0]}</h1><div class="category">${p[1].toUpperCase()}</div><p>${p[2]}</p><div>${p[3].map(t => `<span class="tag">${t}</span>`).join('')}</div><a class="link-button" target="_blank" href="${p[4]}">Open project ↗</a>`; openWindow('projectDetail')}; document.querySelector('#search').oninput = e => renderFiles(projectData.filter(p => p[0].toLowerCase().includes(e.target.value.toLowerCase()) || p[1].toLowerCase().includes(e.target.value.toLowerCase())));
