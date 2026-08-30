@@ -218,7 +218,7 @@ This project is open source and available for personal and commercial use.
 - Google Fonts for typography
 - Netlify for hosting
 - Inspiration from modern portfolio designs
-
+fdf
 ---
 
 **Made with ❤️ by Henil Bhavsar**
